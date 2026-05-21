@@ -1,76 +1,156 @@
 import logo from "../assets/loginSide.png";
 import "../CSS/login.css";
 
-import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-function LogoLeft() {
+import { FcGoogle } from "react-icons/fc";
+import { FaApple, FaEye } from "react-icons/fa";
+
+function Login() {
   return (
     <div className="main-container">
 
-      {/* Left Image */}
+      {/* LEFT */}
+
       <div className="left-section">
-        <img src={logo} alt="Finance" />
+
+        <img
+          src={logo}
+          alt="Finance Dashboard"
+        />
+
       </div>
 
-      {/* Right Form */}
+      {/* RIGHT */}
+
       <div className="right-section">
 
-        <form className="login-form">
+        <form
+          className="login-form"
+          onSubmit={(e) => e.preventDefault()}
+        >
 
-          <h1>Lumina Finance</h1>
+          {/* Heading */}
+
+          <h1>
+            Lumina Finance
+          </h1>
 
           <p className="subtitle">
-            Sign in to manage your institutional portfolio.
+            Sign in to manage your
+            institutional portfolio.
           </p>
 
-          {/* Google */}
-          <button type="button" className="social-btn">
-            <FcGoogle size={20} />
-            Continue with Google
-          </button>
+          <div className="social-container">
 
-          {/* Apple */}
-          <button type="button" className="social-btn">
-            <FaApple size={20} />
-            Continue with Apple
-          </button>
+            <button type="button" className="social-btn">
+              <FcGoogle size={24} />
+              <span>Continue with Google</span>
+            </button>
+
+            <button type="button" className="social-btn">
+              <FaApple size={22} />
+              <span>Continue with Apple</span>
+            </button>
+
+          </div>
+
+          {/* Divider */}
 
           <div className="divider">
-            <span>or sign in with email</span>
+
+            <span>
+              or sign in with email
+            </span>
+
           </div>
 
           {/* Email */}
-          <label>Email Address</label>
-          <input type="email" placeholder="name@company.com" />
+
+          <label htmlFor="email">
+
+            Email Address
+
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            placeholder="name@company.com"
+            required
+          />
 
           {/* Password */}
-          <label>Password</label>
+
+          <label htmlFor="password">
+
+            Password
+
+          </label>
 
           <div className="password-box">
-            <input type="password" placeholder="••••••••" />
+
+            <input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              required
+            />
+
             <FaEye className="eye-icon" />
+
           </div>
 
-          {/* Bottom Row */}
+          {/* Remember */}
+
           <div className="bottom-row">
+
             <div className="remember">
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember">Remember me</label>
+
+              <input
+                id="remember"
+                type="checkbox"
+              />
+
+              <label htmlFor="remember">
+
+                Remember me
+
+              </label>
+
             </div>
 
-            <a href="/">Forgot Password?</a>
+            <Link
+              to="/forgot"
+              className="forgot-link"
+            >
+              Forgot Password?
+            </Link>
+
           </div>
 
-          {/* Sign In */}
-          <button type="submit" className="signin-btn">
+          {/* Submit */}
+
+          <button
+            type="submit"
+            className="signin-btn"
+          >
             Sign In
           </button>
 
+          {/* Footer */}
+
           <p className="footer-text">
+
             Don't have an account?
-            <span> Request Access</span>
+
+            <Link
+              to="/create-account"
+              className="request-link"
+            >
+              Request Access
+            </Link>
+
           </p>
 
         </form>
@@ -81,4 +161,4 @@ function LogoLeft() {
   );
 }
 
-export default LogoLeft;
+export default Login;
