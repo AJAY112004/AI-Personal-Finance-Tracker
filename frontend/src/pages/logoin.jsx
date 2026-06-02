@@ -1,16 +1,74 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import logo from "../assets/loginSide.png";
+
 import "../CSS/login.css";
 
-import { Link } from "react-router-dom";
-
 import { FcGoogle } from "react-icons/fc";
-import { FaApple, FaEye } from "react-icons/fa";
+import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
+
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    remember: false,
+  });
+
+  const handleChange = (e) => {
+
+    const { name, value, type, checked } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : value,
+    });
+
+  };
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      /*
+      Replace this with your Django Login API
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/login/",
+        formData
+      );
+      */
+
+      console.log("Login Data:", formData);
+
+      navigate("/dashboard");
+
+    } catch (error) {
+
+      console.error(
+        "Login Error:",
+        error
+      );
+
+    }
+
+  };
+
   return (
+
     <div className="main-container">
 
-      {/* LEFT */}
+      {/* LEFT SIDE */}
 
       <div className="left-section">
 
@@ -21,41 +79,63 @@ function Login() {
 
       </div>
 
-      {/* RIGHT */}
+      {/* RIGHT SIDE */}
 
       <div className="right-section">
 
         <form
           className="login-form"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
 
-          {/* Heading */}
+          {/* TITLE */}
 
           <h1>
             Lumina Finance
           </h1>
 
           <p className="subtitle">
+
             Sign in to manage your
             institutional portfolio.
+
           </p>
+
+          {/* GOOGLE */}
 
           <div className="social-container">
 
-            <button type="button" className="social-btn">
-              <FcGoogle size={24} />
-              <span>Continue with Google</span>
+            <button
+              type="button"
+              className="social-btn"
+            >
+
+              <FcGoogle size={22} />
+
+              <span>
+                Continue with Google
+              </span>
+
             </button>
 
-            <button type="button" className="social-btn">
-              <FaApple size={22} />
-              <span>Continue with Apple</span>
+            {/* APPLE */}
+
+            <button
+              type="button"
+              className="social-btn"
+            >
+
+              <FaApple size={20} />
+
+              <span>
+                Continue with Apple
+              </span>
+
             </button>
 
           </div>
 
-          {/* Divider */}
+          {/* DIVIDER */}
 
           <div className="divider">
 
@@ -65,7 +145,7 @@ function Login() {
 
           </div>
 
-          {/* Email */}
+          {/* EMAIL */}
 
           <label htmlFor="email">
 
@@ -75,12 +155,15 @@ function Login() {
 
           <input
             id="email"
+            name="email"
             type="email"
             placeholder="name@company.com"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
 
-          {/* Password */}
+          {/* PASSWORD */}
 
           <label htmlFor="password">
 
@@ -92,16 +175,39 @@ function Login() {
 
             <input
               id="password"
-              type="password"
+              name="password"
+              type={
+                showPassword
+                  ? "text"
+                  : "password"
+              }
               placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
               required
             />
 
-            <FaEye className="eye-icon" />
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={() =>
+                setShowPassword(
+                  !showPassword
+                )
+              }
+            >
+
+              {showPassword ? (
+                <FaEyeSlash />
+              ) : (
+                <FaEye />
+              )}
+
+            </button>
 
           </div>
 
-          {/* Remember */}
+          {/* REMEMBER */}
 
           <div className="bottom-row">
 
@@ -109,7 +215,12 @@ function Login() {
 
               <input
                 id="remember"
+                name="remember"
                 type="checkbox"
+                checked={
+                  formData.remember
+                }
+                onChange={handleChange}
               />
 
               <label htmlFor="remember">
@@ -124,36 +235,37 @@ function Login() {
               to="/forgot"
               className="forgot-link"
             >
+
               Forgot Password?
+
             </Link>
 
           </div>
 
-          {/* Submit */}
+          {/* LOGIN BUTTON */}
 
           <button
             type="submit"
             className="signin-btn"
           >
-            <Link
-              to="/Dashboard"
-              className="request-link"
-            >
-              Sign In
-            </Link>
+
+            Sign In
+
           </button>
 
-          {/* Footer */}
+          {/* FOOTER */}
 
           <p className="footer-text">
 
-            Don't have an account?
+            Don't have an account?{" "}
 
             <Link
               to="/create-account"
               className="request-link"
             >
-              Request Access
+
+              Create Account
+
             </Link>
 
           </p>
@@ -163,7 +275,9 @@ function Login() {
       </div>
 
     </div>
+
   );
+
 }
 
 export default Login;

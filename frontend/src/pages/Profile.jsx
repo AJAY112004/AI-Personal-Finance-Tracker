@@ -1,14 +1,25 @@
-//import { Link } from "react-router-dom";
+import Layout from "../components/Layout";
 
-import SideBar from "../components/SideBar";
+function Profile() {
 
-function Profile(){
-    return(
-    <>
-        <SideBar />
+  return (
+
+    <Layout>
+
+      <div className="page-content">
+
         <h1>Profile</h1>
-    </>
-);
+
+        <p>
+          Manage your personal information and preferences.
+        </p>
+
+      </div>
+
+    </Layout>
+
+  );
+
 }
 
 export default Profile;

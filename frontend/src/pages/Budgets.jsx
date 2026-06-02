@@ -1,13 +1,22 @@
-//import { Link } from "react-router-dom";
+import Layout from "../components/Layout";
 
-import SideBar from "../components/SideBar";
 
 function Budgets(){
     return(
-    <>
-        <SideBar />
+        
+    <Layout>
+
+      <div className="page-content">
+
         <h1>Budgets</h1>
-    </>
+
+        <p>
+          Manage and track all your income and expense budgets.
+        </p>
+
+      </div>
+
+    </Layout>
 );
 }
 

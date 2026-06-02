@@ -1,14 +1,25 @@
-//import { Link } from "react-router-dom";
+import Layout from "../components/Layout";
 
-import SideBar from "../components/SideBar";
+function Analytics() {
 
-function Analytics(){
-    return(
-    <>
-        <SideBar />
+  return (
+
+    <Layout>
+
+      <div className="page-content">
+
         <h1>Analytics</h1>
-    </>
-);
+
+        <p>
+          Analyze your financial data and gain insights into your spending patterns.
+        </p>
+
+      </div>
+
+    </Layout>
+
+  );
+
 }
 
 export default Analytics;

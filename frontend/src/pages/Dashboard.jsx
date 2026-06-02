@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 
 import Layout from "../components/Layout";
@@ -10,69 +9,73 @@ import "../CSS/Dashboard.css";
 import {
   AreaChart,
   Area,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Tooltip
 } from "recharts";
 
 function Dashboard() {
 
-  /* =========================
-     DASHBOARD SUMMARY
-  ========================= */
+  const [loading, setLoading] = useState(true);
 
-  const [summary, setSummary] = useState({
-    balance: 2450890,
-    income: 145200,
-    expense: 32450,
-    savings: 77.6,
+  const [dashboardData, setDashboardData] = useState({
+    summary: {
+      balance: 0,
+      income: 0,
+      expense: 0,
+      savings: 0,
+    },
+    insight: "No insights available.",
+    allocation: {
+      equities: 0,
+      fixed_income: 0,
+      cash: 0,
+    },
+    chart: [],
+    transactions: [],
   });
-
-  /* =========================
-     CHART DATA
-  ========================= */
-
-  const chartData = [
-    { value: 20 },
-    { value: 25 },
-    { value: 18 },
-    { value: 15 },
-    { value: 24 },
-    { value: 42 },
-    { value: 55 },
-    { value: 50 },
-    { value: 46 },
-    { value: 65 }
-  ];
-
-  /* =========================
-     FETCH BACKEND DATA
-  ========================= */
 
   useEffect(() => {
 
-    const fetchDashboardData = async () => {
+    const fetchDashboard = async () => {
 
       try {
 
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/dashboard-summary/"
+          "http://127.0.0.1:8000/api/dashboard/"
         );
 
-        setSummary(response.data);
+        setDashboardData(response.data);
 
       } catch (error) {
 
         console.error(
-          "Dashboard fetch error:",
+          "Dashboard Error:",
           error
         );
+
+      } finally {
+
+        setLoading(false);
 
       }
 
     };
 
-    fetchDashboardData();
+    fetchDashboard();
 
   }, []);
+
+  if (loading) {
+
+    return (
+      <Layout>
+        <div className="dashboard-content">
+          <h2>Loading Dashboard...</h2>
+        </div>
+      </Layout>
+    );
+
+  }
 
   return (
 
@@ -80,9 +83,7 @@ function Dashboard() {
 
       <div className="dashboard-content">
 
-        {/* =========================
-            HEADER
-        ========================= */}
+        {/* HEADER */}
 
         <div className="dashboard-header">
 
@@ -94,51 +95,45 @@ function Dashboard() {
 
         </div>
 
-        {/* =========================
-            STAT CARDS
-        ========================= */}
+        {/* STATS */}
 
         <div className="stats-grid">
 
           <StatCard
             title="Total Balance"
-            value={summary.balance}
-            subtitle="+2.4% vs last month"
+            value={dashboardData?.summary?.balance || 0}
+            subtitle="Current balance"
             type="up"
           />
 
           <StatCard
             title="Monthly Income"
-            value={summary.income}
-            subtitle="+5.1%"
+            value={dashboardData?.summary?.income || 0}
+            subtitle="Income this month"
             type="up"
           />
 
           <StatCard
             title="Monthly Expense"
-            value={summary.expense}
-            subtitle="-1.2%"
+            value={dashboardData?.summary?.expense || 0}
+            subtitle="Expenses this month"
             type="warning"
           />
 
           <StatCard
             title="Savings Rate"
-            value={summary.savings}
-            subtitle="+0.8%"
+            value={dashboardData?.summary?.savings || 0}
+            subtitle="Savings percentage"
             type="target"
           />
 
         </div>
 
-        {/* =========================
-            BOTTOM SECTION
-        ========================= */}
+        {/* MIDDLE SECTION */}
 
-        <div className="dashboard-bottom">
+        <div className="middle-section">
 
-          {/* =========================
-              CAPITAL FLOW
-          ========================= */}
+          {/* CAPITAL FLOW */}
 
           <div className="capital-card">
 
@@ -160,16 +155,16 @@ function Dashboard() {
 
             </div>
 
-            {/* CHART */}
-
             <div className="chart-wrapper">
 
               <ResponsiveContainer
                 width="100%"
-                height={300}
+                height={320}
               >
 
-                <AreaChart data={chartData}>
+                <AreaChart
+                  data={dashboardData.chart}
+                >
 
                   <defs>
 
@@ -183,13 +178,13 @@ function Dashboard() {
 
                       <stop
                         offset="5%"
-                        stopColor="#d9d4e8"
+                        stopColor="#cfc8f4"
                         stopOpacity={0.8}
                       />
 
                       <stop
                         offset="95%"
-                        stopColor="#d9d4e8"
+                        stopColor="#cfc8f4"
                         stopOpacity={0.1}
                       />
 
@@ -197,11 +192,13 @@ function Dashboard() {
 
                   </defs>
 
+                  <Tooltip />
+
                   <Area
                     type="monotone"
                     dataKey="value"
-                    stroke="#d9d4e8"
-                    strokeWidth={4}
+                    stroke="#6c4df6"
+                    strokeWidth={3}
                     fill="url(#colorFlow)"
                   />
 
@@ -213,13 +210,9 @@ function Dashboard() {
 
           </div>
 
-          {/* =========================
-              RIGHT SIDE CARDS
-          ========================= */}
+          {/* RIGHT PANEL */}
 
-          <div className="side-cards">
-
-            {/* AI INSIGHT */}
+          <div className="right-panel">
 
             <div className="follow-card">
 
@@ -232,17 +225,10 @@ function Dashboard() {
               </div>
 
               <p className="quote">
-
-                Your operational expenses have
-                decreased by 4% this quarter,
-                largely driven by optimized
-                vendor contracts.
-
+                {dashboardData.insight}
               </p>
 
             </div>
-
-            {/* ALLOCATION */}
 
             <div className="follow-card">
 
@@ -258,17 +244,23 @@ function Dashboard() {
 
                 <li>
                   <span>Equities</span>
-                  <span>65%</span>
+                  <span>
+                    {dashboardData?.allocation?.equities || 0}%
+                  </span>
                 </li>
 
                 <li>
                   <span>Fixed Income</span>
-                  <span>25%</span>
+                  <span>
+                    {dashboardData?.allocation?.fixed_income || 0}%
+                  </span>
                 </li>
 
                 <li>
                   <span>Cash</span>
-                  <span>10%</span>
+                  <span>
+                    {dashboardData?.allocation?.cash || 0}%
+                  </span>
                 </li>
 
               </ul>
@@ -276,6 +268,104 @@ function Dashboard() {
             </div>
 
           </div>
+
+        </div>
+
+        {/* TRANSACTIONS */}
+
+        <div className="transactions-card">
+
+          <div className="transactions-header">
+
+            <h2>Recent Transactions</h2>
+
+            <span>View All</span>
+
+          </div>
+
+          <table className="transactions-table">
+
+            <thead>
+
+              <tr>
+
+                <th>ENTITY</th>
+                <th>DATE</th>
+                <th>AMOUNT</th>
+                <th>STATUS</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              {dashboardData.transactions.length > 0 ? (
+
+                dashboardData.transactions.map(
+                  (transaction, index) => (
+
+                    <tr key={index}>
+
+                      <td>
+                        {transaction.entity}
+                      </td>
+
+                      <td>
+                        {transaction.date}
+                      </td>
+
+                      <td>
+                        ₹
+                        {Number(
+                          transaction.amount
+                        ).toLocaleString()}
+                      </td>
+
+                      <td>
+
+                        <span
+                          className={`status ${
+                            transaction.status === "Completed"
+                              ? "completed"
+                              : "processing"
+                          }`}
+                        >
+
+                          {transaction.status}
+
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                  )
+                )
+
+              ) : (
+
+                <tr>
+
+                  <td
+                    colSpan="4"
+                    style={{
+                      textAlign: "center",
+                      padding: "20px"
+                    }}
+                  >
+
+                    No Transactions Found
+
+                  </td>
+
+                </tr>
+
+              )}
+
+            </tbody>
+
+          </table>
 
         </div>
 

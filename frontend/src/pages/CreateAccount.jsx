@@ -1,35 +1,71 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import "../CSS/CreateAccount.css";
+
 import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
 
 function CreateAccount() {
+
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+  };
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+
+    console.log(formData);
+
+    navigate("/dashboard");
+
+  };
+
   return (
-    <div className="main-container">
+
+    <div className="signup-container">
 
       {/* LEFT */}
 
-      <div className="left-section">
+      <div className="signup-left">
+
+        <div className="brand">
+
+          ▲ Lumina Finance
+
+        </div>
 
         <div className="hero-card">
 
-          <div className="hero-content">
+          <h1>
+            Institutional Wealth,
+            <br />
+            Accessible.
+          </h1>
 
-            <h1>
-              Institutional Wealth,
-              <br />
-              Accessible.
-            </h1>
+          <p>
+            Experience next-generation portfolio management
+            and intelligent insights driven by advanced
+            analytics.
+          </p>
 
-            <p>
-              Experience next-generation portfolio management
-              and intelligent insights driven by advanced
-              analytics.
-            </p>
-
-          </div>
-
-          <div className="chart-area">
+          <div className="chart-section">
 
             <div className="growth-card">
 
@@ -53,15 +89,20 @@ function CreateAccount() {
 
         </div>
 
+        <p className="copyright">
+          © 2026 Lumina Finance.
+          All rights reserved.
+        </p>
+
       </div>
 
       {/* RIGHT */}
 
-      <div className="right-section">
+      <div className="signup-right">
 
         <form
-          className="create-form"
-          onSubmit={(e) => e.preventDefault()}
+          className="signup-form"
+          onSubmit={handleSubmit}
         >
 
           <h2>Create an account</h2>
@@ -74,7 +115,10 @@ function CreateAccount() {
 
           <input
             type="text"
+            name="fullName"
             placeholder="John Doe"
+            value={formData.fullName}
+            onChange={handleChange}
             required
           />
 
@@ -82,17 +126,47 @@ function CreateAccount() {
 
           <input
             type="email"
+            name="email"
             placeholder="john@example.com"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
 
           <label>Password</label>
 
-          <input
-            type="password"
-            placeholder="••••••••"
-            required
-          />
+          <div className="password-box">
+
+            <input
+              type={
+                showPassword
+                  ? "text"
+                  : "password"
+              }
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={() =>
+                setShowPassword(
+                  !showPassword
+                )
+              }
+            >
+
+              {showPassword
+                ? <FaEyeSlash />
+                : <FaEye />}
+
+            </button>
+
+          </div>
 
           <small>
             Must be at least 8 characters.
@@ -100,41 +174,65 @@ function CreateAccount() {
 
           <button
             type="submit"
-            className="sub-button"
+            className="create-btn"
           >
+
             Create Account →
+
           </button>
 
           <div className="divider">
-            or continue with
+
+            <span>
+              or continue with
+            </span>
+
           </div>
 
           <div className="social-container">
 
-            <button type="button" className="social-btn">
-              <FcGoogle size={24} />
-              <span>Continue with Google</span>
+            <button
+              type="button"
+              className="social-btn"
+            >
+
+              <FcGoogle size={22} />
+
+              Continue with Google
+
             </button>
 
-            <button type="button" className="social-btn">
-              <FaApple size={22} />
-              <span>Continue with Apple</span>
+            <button
+              type="button"
+              className="social-btn"
+            >
+
+              <FaApple size={20} />
+
+              Continue with Apple
+
             </button>
 
           </div>
 
+          <p className="signin-text">
 
-          <Link to="/login">
             Already have an account?
-            <span> Sign in</span>
-          </Link>
+
+            <Link to="/">
+              Sign in
+            </Link>
+
+          </p>
 
         </form>
 
       </div>
 
     </div>
+
   );
+
 }
 
 export default CreateAccount;

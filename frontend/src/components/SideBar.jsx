@@ -1,3 +1,5 @@
+import { Link, useLocation } from "react-router-dom";
+
 import {
   LayoutDashboard,
   ReceiptText,
@@ -12,63 +14,117 @@ import "../CSS/SideBar.css";
 
 function SideBar() {
 
+  const location = useLocation();
+
   return (
 
     <aside className="sidebar">
 
       <div>
 
+        {/* Logo */}
+
         <div className="logo">
 
           <h1>Lumina</h1>
+
           <h2>Finance</h2>
 
           <p>Institutional Wealth</p>
 
         </div>
 
+        {/* Navigation */}
+
         <nav className="menu">
 
-          <button className="menu-item active">
+          <Link
+            to="/dashboard"
+            className={`menu-item ${
+              location.pathname === "/dashboard"
+                ? "active"
+                : ""
+            }`}
+          >
             <LayoutDashboard size={18} />
             Dashboard
-          </button>
+          </Link>
 
-          <button className="menu-item">
+          <Link
+            to="/transactions"
+            className={`menu-item ${
+              location.pathname === "/transactions"
+                ? "active"
+                : ""
+            }`}
+          >
             <ReceiptText size={18} />
             Transactions
-          </button>
+          </Link>
 
-          <button className="menu-item">
+          <Link
+            to="/budgets"
+            className={`menu-item ${
+              location.pathname === "/budgets"
+                ? "active"
+                : ""
+            }`}
+          >
             <Wallet size={18} />
             Budgets
-          </button>
+          </Link>
 
-          <button className="menu-item">
+          <Link
+            to="/analytics"
+            className={`menu-item ${
+              location.pathname === "/analytics"
+                ? "active"
+                : ""
+            }`}
+          >
             <BarChart3 size={18} />
             Analytics
-          </button>
+          </Link>
 
-          <button className="menu-item">
+          <Link
+            to="/ai-insights"
+            className={`menu-item ${
+              location.pathname === "/ai-insights"
+                ? "active"
+                : ""
+            }`}
+          >
             <Sparkles size={18} />
             AI Insights
-          </button>
+          </Link>
 
         </nav>
 
       </div>
 
+      {/* Bottom Menu */}
+
       <div className="bottom-menu">
 
-        <button className="menu-item">
+        <Link
+          to="/profile"
+          className={`menu-item ${
+            location.pathname === "/profile"
+              ? "active"
+              : ""
+          }`}
+        >
           <User size={18} />
           Profile
-        </button>
+        </Link>
 
-        <button className="menu-item">
+        <Link
+          to="/"
+          className="menu-item"
+        >
           <LogOut size={18} />
           Logout
-        </button>
+        </Link>
 
       </div>
 

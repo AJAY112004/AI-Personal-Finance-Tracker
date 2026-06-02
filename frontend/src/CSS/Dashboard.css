@@ -1,490 +1,301 @@
-/* =========================
-   DASHBOARD CONTENT
-========================= */
-
 .dashboard-content{
-
-padding:40px;
-
-background:#f5f3fb;
-
+padding:30px;
+background:#f7f6fb;
 min-height:100vh;
 }
 
 /* =========================
-   DASHBOARD HEADER
+HEADER
 ========================= */
 
 .dashboard-header{
-
 margin-top:60px;
+margin-bottom:28px;
 }
 
 .dashboard-header h1{
-
-font-size:40px;
-
+font-size:52px;
 font-weight:700;
-
 color:#111827;
-
-margin-bottom:10px;
-
-letter-spacing:-2px;
+margin-bottom:8px;
 }
 
 .dashboard-header p{
-
-font-size:18px;
-
+font-size:16px;
 color:#6b7280;
 }
 
 /* =========================
-   STATS GRID
+STATS GRID
 ========================= */
 
 .stats-grid{
-
 display:grid;
-
 grid-template-columns:repeat(4,1fr);
-
-gap:22px;
-
-margin-bottom:30px;
+gap:18px;
+margin-bottom:24px;
 }
 
 /* =========================
-   STAT CARD
+STAT CARD
 ========================= */
 
 .stat-card{
-
-background:white;
-
-border-radius:22px;
-
-padding:24px;
-
+background:#fff;
+border-radius:18px;
+padding:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.04);
 position:relative;
-
-box-shadow:0 2px 10px rgba(0,0,0,0.04);
-
-transition:0.25s;
-
-overflow:hidden;
+transition:.25s;
 }
 
 .stat-card:hover{
-
 transform:translateY(-3px);
 }
 
 .stat-card h4{
-
-font-size:15px;
-
+font-size:13px;
 font-weight:600;
-
-color:#6b7280;
-
-margin-bottom:18px;
-}
-
-.stat-card h2{
-
-font-size:38px;
-
-font-weight:700;
-
-color:#111827;
-
+color:#7b7b7b;
 margin-bottom:12px;
 }
 
-.stat-card p{
-
-font-size:14px;
-
-font-weight:500;
+.stat-card h2{
+font-size:32px;
+font-weight:700;
+margin-bottom:10px;
+color:#111827;
 }
 
-/* =========================
-   CARD TYPES
-========================= */
+.stat-card p{
+font-size:13px;
+font-weight:600;
+}
 
 .stat-card.up p{
-
 color:#10b981;
 }
 
 .stat-card.warning p{
-
 color:#ef4444;
 }
 
 .stat-card.target p{
-
 color:#f59e0b;
 }
 
 /* =========================
-   SMALL ICON CIRCLE
+MIDDLE SECTION
 ========================= */
 
-.stat-card::after{
-
-content:"";
-
-position:absolute;
-
-top:20px;
-
-right:20px;
-
-width:34px;
-
-height:34px;
-
-border-radius:50%;
-
-background:#f3efff;
-}
-
-/* =========================
-   DASHBOARD BOTTOM
-========================= */
-
-.dashboard-bottom{
-
+.middle-section{
 display:grid;
-
-grid-template-columns:2fr 1fr;
-
-gap:24px;
-
-margin-top:10px;
-}
-
-/* =========================
-   CHART CARD
-========================= */
-
-.chart-card{
-
-background:white;
-
-border-radius:24px;
-
-padding:24px;
-
-min-height:420px;
-
-box-shadow:0 2px 10px rgba(0,0,0,0.04);
-
-position:relative;
-}
-
-.chart-card h3{
-
-font-size:28px;
-
-font-weight:700;
-
-color:#111827;
-
+grid-template-columns:2.2fr 1fr;
+gap:20px;
 margin-bottom:24px;
 }
 
 /* =========================
-   FAKE GRAPH
+CAPITAL FLOW CARD
 ========================= */
 
-.fake-graph{
-
-position:absolute;
-
-bottom:0;
-
-left:0;
-
-width:100%;
-
-height:280px;
-
-background:linear-gradient(
-180deg,
-rgba(108,77,246,0.18) 0%,
-rgba(108,77,246,0.03) 100%
-);
-
-border-radius:120px 120px 0 0;
-}
-
-/* =========================
-   RIGHT SIDEBAR CARDS
-========================= */
-
-.side-cards{
-
-display:flex;
-
-flex-direction:column;
-
-gap:22px;
-}
-
-/* =========================
-   FOLLOW CARD
-========================= */
-
-.follow-card{
-
+.capital-card{
 background:white;
-
-border-radius:24px;
-
+border-radius:22px;
 padding:24px;
-
 box-shadow:0 2px 10px rgba(0,0,0,0.04);
 }
 
+.capital-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.capital-top h3{
+font-size:28px;
+font-weight:700;
+color:#111827;
+}
+
+.chart-wrapper{
+height:320px;
+width:100%;
+}
+
 /* =========================
-   FOLLOW TOP
+TIME FILTERS
 ========================= */
+
+.time-buttons{
+display:flex;
+gap:8px;
+}
+
+.time-buttons button{
+border:none;
+background:#f1f1f5;
+padding:8px 14px;
+border-radius:12px;
+font-size:12px;
+font-weight:600;
+cursor:pointer;
+color:#666;
+}
+
+.active-time{
+background:#6c4df6 !important;
+color:white !important;
+}
+
+/* =========================
+RIGHT PANEL
+========================= */
+
+.right-panel{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.follow-card{
+background:white;
+border-radius:22px;
+padding:22px;
+box-shadow:0 2px 10px rgba(0,0,0,0.04);
+}
 
 .follow-top{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-margin-bottom:18px;
+margin-bottom:16px;
 }
-
-/* =========================
-   TAG
-========================= */
 
 .promoted{
-
-font-size:14px;
-
+font-size:13px;
 font-weight:600;
-
-padding:8px 14px;
-
+padding:8px 12px;
 background:#f3efff;
-
 color:#6c4df6;
-
-border-radius:12px;
+border-radius:10px;
 }
 
-/* =========================
-   INSIGHT TEXT
-========================= */
-
 .quote{
-
-font-size:17px;
-
+font-size:15px;
 line-height:1.8;
-
 color:#4b5563;
 }
 
 /* =========================
-   ALLOCATION LIST
+ALLOCATION
 ========================= */
 
 .allocation-list{
-
 list-style:none;
-
 display:flex;
-
 flex-direction:column;
-
-gap:18px;
-
-margin-top:10px;
+gap:14px;
 }
 
 .allocation-list li{
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-font-size:16px;
-
-font-weight:500;
-
+font-size:15px;
 color:#374151;
-
 position:relative;
-
 padding-left:18px;
 }
 
-/* DOT */
-
 .allocation-list li::before{
-
 content:"";
-
 position:absolute;
-
 left:0;
-
 top:50%;
-
 transform:translateY(-50%);
-
-width:10px;
-
-height:10px;
-
+width:8px;
+height:8px;
 border-radius:50%;
-
 background:#6c4df6;
 }
 
 /* =========================
-   TRANSACTION TABLE
+TRANSACTIONS
 ========================= */
 
-.transaction-card{
-
-margin-top:30px;
-
+.transactions-card{
 background:white;
-
-border-radius:24px;
-
-padding:28px;
-
+border-radius:22px;
+padding:24px;
 box-shadow:0 2px 10px rgba(0,0,0,0.04);
 }
 
-.transaction-header{
-
+.transactions-header{
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-margin-bottom:24px;
+margin-bottom:18px;
 }
 
-.transaction-header h3{
-
-font-size:28px;
-
+.transactions-header h2{
+font-size:26px;
 font-weight:700;
-
-color:#111827;
 }
 
-.transaction-header span{
-
-font-size:15px;
-
+.transactions-header span{
+font-size:14px;
 font-weight:600;
-
 color:#6c4df6;
-
 cursor:pointer;
 }
 
-/* =========================
-   TABLE
-========================= */
-
-.transaction-table{
-
+.transactions-table{
 width:100%;
-
 border-collapse:collapse;
 }
 
-.transaction-table thead th{
-
+.transactions-table th{
 text-align:left;
-
-font-size:13px;
-
+font-size:12px;
 font-weight:700;
-
 color:#9ca3af;
-
-padding-bottom:18px;
-
-text-transform:uppercase;
+padding-bottom:16px;
 }
 
-.transaction-table tbody td{
-
+.transactions-table td{
 padding:18px 0;
-
-font-size:16px;
-
-font-weight:500;
-
-color:#374151;
-
 border-top:1px solid #f3f4f6;
+font-size:15px;
+color:#374151;
 }
-
-/* =========================
-   STATUS BADGES
-========================= */
 
 .status{
-
-padding:8px 14px;
-
-border-radius:20px;
-
-font-size:13px;
-
+padding:6px 12px;
+border-radius:16px;
+font-size:12px;
 font-weight:600;
 }
 
 .completed{
-
 background:#fef3c7;
-
 color:#b45309;
 }
 
 .processing{
-
 background:#ede9fe;
-
 color:#6d28d9;
 }
 
 /* =========================
-   RESPONSIVE
+RESPONSIVE
 ========================= */
 
 @media(max-width:1200px){
 
 .stats-grid{
-
 grid-template-columns:repeat(2,1fr);
 }
 
-.dashboard-bottom{
-
+.middle-section{
 grid-template-columns:1fr;
 }
 
@@ -493,123 +304,24 @@ grid-template-columns:1fr;
 @media(max-width:768px){
 
 .dashboard-content{
-
-padding:20px;
+padding:18px;
 }
 
 .dashboard-header h1{
-
-font-size:42px;
+font-size:38px;
 }
 
 .stats-grid{
-
 grid-template-columns:1fr;
 }
 
-.chart-card{
-
-min-height:320px;
+.chart-wrapper{
+height:260px;
 }
 
-.transaction-table{
-
+.transactions-table{
 display:block;
-
 overflow-x:auto;
 }
 
-}
-
-
-.capital-card{
-
-background:white;
-
-border-radius:26px;
-
-padding:28px;
-
-box-shadow:0 2px 10px rgba(0,0,0,0.04);
-
-height:420px;
-}
-
-/* TOP */
-
-.capital-top{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-margin-bottom:30px;
-}
-
-.capital-top h3{
-
-font-size:30px;
-
-font-weight:700;
-
-color:#111827;
-}
-
-/* BUTTONS */
-
-.time-buttons{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-}
-
-.time-buttons button{
-
-border:none;
-
-background:#f3f4f6;
-
-padding:8px 14px;
-
-border-radius:14px;
-
-font-size:13px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:0.25s;
-
-color:#666;
-}
-
-.time-buttons button:hover{
-
-background:#ece8ff;
-
-color:#6c4df6;
-}
-
-/* ACTIVE */
-
-.active-time{
-
-background:#6c4df6 !important;
-
-color:white !important;
-}
-
-/* CHART */
-
-.chart-wrapper{
-
-width:100%;
-
-height:300px;
 }
