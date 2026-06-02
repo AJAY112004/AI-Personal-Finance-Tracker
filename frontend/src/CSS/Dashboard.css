@@ -1,0 +1,615 @@
+/* =========================
+   DASHBOARD CONTENT
+========================= */
+
+.dashboard-content{
+
+padding:40px;
+
+background:#f5f3fb;
+
+min-height:100vh;
+}
+
+/* =========================
+   DASHBOARD HEADER
+========================= */
+
+.dashboard-header{
+
+margin-top:60px;
+}
+
+.dashboard-header h1{
+
+font-size:40px;
+
+font-weight:700;
+
+color:#111827;
+
+margin-bottom:10px;
+
+letter-spacing:-2px;
+}
+
+.dashboard-header p{
+
+font-size:18px;
+
+color:#6b7280;
+}
+
+/* =========================
+   STATS GRID
+========================= */
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:22px;
+
+margin-bottom:30px;
+}
+
+/* =========================
+   STAT CARD
+========================= */
+
+.stat-card{
+
+background:white;
+
+border-radius:22px;
+
+padding:24px;
+
+position:relative;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.04);
+
+transition:0.25s;
+
+overflow:hidden;
+}
+
+.stat-card:hover{
+
+transform:translateY(-3px);
+}
+
+.stat-card h4{
+
+font-size:15px;
+
+font-weight:600;
+
+color:#6b7280;
+
+margin-bottom:18px;
+}
+
+.stat-card h2{
+
+font-size:38px;
+
+font-weight:700;
+
+color:#111827;
+
+margin-bottom:12px;
+}
+
+.stat-card p{
+
+font-size:14px;
+
+font-weight:500;
+}
+
+/* =========================
+   CARD TYPES
+========================= */
+
+.stat-card.up p{
+
+color:#10b981;
+}
+
+.stat-card.warning p{
+
+color:#ef4444;
+}
+
+.stat-card.target p{
+
+color:#f59e0b;
+}
+
+/* =========================
+   SMALL ICON CIRCLE
+========================= */
+
+.stat-card::after{
+
+content:"";
+
+position:absolute;
+
+top:20px;
+
+right:20px;
+
+width:34px;
+
+height:34px;
+
+border-radius:50%;
+
+background:#f3efff;
+}
+
+/* =========================
+   DASHBOARD BOTTOM
+========================= */
+
+.dashboard-bottom{
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:24px;
+
+margin-top:10px;
+}
+
+/* =========================
+   CHART CARD
+========================= */
+
+.chart-card{
+
+background:white;
+
+border-radius:24px;
+
+padding:24px;
+
+min-height:420px;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.04);
+
+position:relative;
+}
+
+.chart-card h3{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#111827;
+
+margin-bottom:24px;
+}
+
+/* =========================
+   FAKE GRAPH
+========================= */
+
+.fake-graph{
+
+position:absolute;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:280px;
+
+background:linear-gradient(
+180deg,
+rgba(108,77,246,0.18) 0%,
+rgba(108,77,246,0.03) 100%
+);
+
+border-radius:120px 120px 0 0;
+}
+
+/* =========================
+   RIGHT SIDEBAR CARDS
+========================= */
+
+.side-cards{
+
+display:flex;
+
+flex-direction:column;
+
+gap:22px;
+}
+
+/* =========================
+   FOLLOW CARD
+========================= */
+
+.follow-card{
+
+background:white;
+
+border-radius:24px;
+
+padding:24px;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.04);
+}
+
+/* =========================
+   FOLLOW TOP
+========================= */
+
+.follow-top{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:18px;
+}
+
+/* =========================
+   TAG
+========================= */
+
+.promoted{
+
+font-size:14px;
+
+font-weight:600;
+
+padding:8px 14px;
+
+background:#f3efff;
+
+color:#6c4df6;
+
+border-radius:12px;
+}
+
+/* =========================
+   INSIGHT TEXT
+========================= */
+
+.quote{
+
+font-size:17px;
+
+line-height:1.8;
+
+color:#4b5563;
+}
+
+/* =========================
+   ALLOCATION LIST
+========================= */
+
+.allocation-list{
+
+list-style:none;
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+margin-top:10px;
+}
+
+.allocation-list li{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+font-size:16px;
+
+font-weight:500;
+
+color:#374151;
+
+position:relative;
+
+padding-left:18px;
+}
+
+/* DOT */
+
+.allocation-list li::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+top:50%;
+
+transform:translateY(-50%);
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+background:#6c4df6;
+}
+
+/* =========================
+   TRANSACTION TABLE
+========================= */
+
+.transaction-card{
+
+margin-top:30px;
+
+background:white;
+
+border-radius:24px;
+
+padding:28px;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.04);
+}
+
+.transaction-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:24px;
+}
+
+.transaction-header h3{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#111827;
+}
+
+.transaction-header span{
+
+font-size:15px;
+
+font-weight:600;
+
+color:#6c4df6;
+
+cursor:pointer;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.transaction-table{
+
+width:100%;
+
+border-collapse:collapse;
+}
+
+.transaction-table thead th{
+
+text-align:left;
+
+font-size:13px;
+
+font-weight:700;
+
+color:#9ca3af;
+
+padding-bottom:18px;
+
+text-transform:uppercase;
+}
+
+.transaction-table tbody td{
+
+padding:18px 0;
+
+font-size:16px;
+
+font-weight:500;
+
+color:#374151;
+
+border-top:1px solid #f3f4f6;
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+
+.status{
+
+padding:8px 14px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:600;
+}
+
+.completed{
+
+background:#fef3c7;
+
+color:#b45309;
+}
+
+.processing{
+
+background:#ede9fe;
+
+color:#6d28d9;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+.stats-grid{
+
+grid-template-columns:repeat(2,1fr);
+}
+
+.dashboard-bottom{
+
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.dashboard-content{
+
+padding:20px;
+}
+
+.dashboard-header h1{
+
+font-size:42px;
+}
+
+.stats-grid{
+
+grid-template-columns:1fr;
+}
+
+.chart-card{
+
+min-height:320px;
+}
+
+.transaction-table{
+
+display:block;
+
+overflow-x:auto;
+}
+
+}
+
+
+.capital-card{
+
+background:white;
+
+border-radius:26px;
+
+padding:28px;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.04);
+
+height:420px;
+}
+
+/* TOP */
+
+.capital-top{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:30px;
+}
+
+.capital-top h3{
+
+font-size:30px;
+
+font-weight:700;
+
+color:#111827;
+}
+
+/* BUTTONS */
+
+.time-buttons{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+}
+
+.time-buttons button{
+
+border:none;
+
+background:#f3f4f6;
+
+padding:8px 14px;
+
+border-radius:14px;
+
+font-size:13px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.25s;
+
+color:#666;
+}
+
+.time-buttons button:hover{
+
+background:#ece8ff;
+
+color:#6c4df6;
+}
+
+/* ACTIVE */
+
+.active-time{
+
+background:#6c4df6 !important;
+
+color:white !important;
+}
+
+/* CHART */
+
+.chart-wrapper{
+
+width:100%;
+
+height:300px;
+}

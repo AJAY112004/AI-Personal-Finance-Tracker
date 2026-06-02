@@ -135,7 +135,12 @@ function Login() {
             type="submit"
             className="signin-btn"
           >
-            Sign In
+            <Link
+              to="/Dashboard"
+              className="request-link"
+            >
+              Sign In
+            </Link>
           </button>
 
           {/* Footer */}
