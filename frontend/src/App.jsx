@@ -1,21 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "../src/pages/logoin";
-import Forgot from "../src/Pages/Forgot";
-import CreateAccount from "../src/pages/CreateAccount";
-import Dashboard from "../src/pages/Dashboard";
-import Logout from "../src/pages/Logout";
-import Profile from "../src/pages/Profile";
-import AI_Insights from "../src/pages/AI_Insights";
-import Analytics from "../src/pages/Analytics";
-import Budgets from "../src/pages/Budgets";
-import Transactions from "../src/pages/Transactions";
+import Login from "./pages/logoin";
+import Forgot from "./pages/Forgot";
+import CreateAccount from "./pages/CreateAccount";
+import Dashboard from "./pages/Dashboard";
+import Logout from "./pages/Logout";
+import Profile from "./pages/Profile";
+import AI_Insights from "./pages/AI_Insights";
+import Analytics from "./pages/Analytics";
+import Budgets from "./pages/Budgets";
+import Transactions from "./pages/Transactions";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/Dashboard" element={<Dashboard />} />
