@@ -1,5 +1,5 @@
 .transactions-content {
-  padding: 100px 30px 40px;
+  padding: 10px 30px;
   width: 100%;
   min-height: 100vh;
   background: #f7f8fc;
@@ -13,9 +13,9 @@
 }
 
 .header-left h1 {
-  font-size: 42px;
+  font-size: 52px;
   font-weight: 800;
-  color: #5b3fd4;
+  color: #39599e;
   margin-bottom: 6px;
   line-height: 1;
   letter-spacing: -1px;

@@ -11,19 +11,13 @@ body{
 
 .forgot-page{
     min-height:100vh;
-
     display:flex;
     flex-direction:column;
-
     justify-content:center;
     align-items:center;
-
     gap:40px;
-
     padding:40px;
 }
-
-/* Brand */
 
 .brand{
     display:flex;
@@ -34,15 +28,10 @@ body{
 .logo-box{
     width:34px;
     height:34px;
-
     background:#5b3fa8;
-
     color:white;
-
     border-radius:10px;
-
     display:flex;
-
     justify-content:center;
     align-items:center;
 }
@@ -52,67 +41,44 @@ body{
     font-size:36px;
 }
 
-/* Card */
-
 .forgot-card{
 
     width:520px;
-
     background:white;
-
     border-radius:22px;
-
     padding:50px;
-
     box-shadow:
     0 10px 30px rgba(0,0,0,.08);
-
     text-align:center;
 }
 
 .icon-circle{
 
     width:64px;
-
     height:64px;
-
     margin:auto;
-
     border-radius:50%;
-
     background:#efe8ff;
-
     color:#5b3fa8;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     font-size:32px;
-
     margin-bottom:25px;
 }
 
 .forgot-card h2{
     font-size:42px;
-
     color:#222;
-
     margin-bottom:18px;
 }
 
 .subtitle{
 
     color:#777;
-
     line-height:1.7;
-
     margin-bottom:35px;
 }
-
-/* Form */
 
 form{
     text-align:left;
@@ -121,48 +87,34 @@ form{
 label{
 
     font-size:15px;
-
     font-weight:700;
-
     color:#444;
-
     margin-bottom:10px;
-
     display:block;
 }
 
 .input-box{
 
     position:relative;
-
     margin-bottom:25px;
 }
 
 .mail-icon{
 
     position:absolute;
-
     top:18px;
-
     left:18px;
-
     color:#aaa;
 }
 
 input{
 
     width:100%;
-
     height:56px;
-
     border:2px solid #e3dff0;
-
     border-radius:12px;
-
     padding-left:50px;
-
     font-size:15px;
-
     outline:none;
 }
 
@@ -171,58 +123,33 @@ input:focus{
 }
 
 .reset-btn{
-
     width:100%;
-
     height:58px;
-
     border:none;
-
     background:#5b3fa8;
-
     color:white;
-
     border-radius:14px;
-
     font-size:16px;
-
     font-weight:700;
-
     cursor:pointer;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:12px;
 }
-
 .reset-btn:hover{
     background:#4b3291;
 }
 
-/* Back */
-
 .back-btn{
-
     border:none;
-
     background:none;
-
     color:#222;
-
     cursor:pointer;
-
     font-size:16px;
-
     display:flex;
-
     gap:10px;
 }
-
-/* Mobile */
 
 @media(max-width:700px){
 

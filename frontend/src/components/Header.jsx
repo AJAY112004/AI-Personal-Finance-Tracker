@@ -1,3 +1,4 @@
+import "../CSS/Header.css";
 import {
   Bell,
   Moon,
@@ -37,6 +38,7 @@ function Header() {
     </div>
 
     <img
+      
       src="https://i.pravatar.cc/50"
       alt="profile"
       className="profile-image"

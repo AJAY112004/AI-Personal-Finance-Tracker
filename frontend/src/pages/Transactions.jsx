@@ -143,7 +143,6 @@ function Transactions() {
     if (file) setReceiptFile(file);
   };
 
-  // Filtering
   const filteredTransactions = transactions.filter((t) => {
     const q = searchQuery.toLowerCase();
     const matchSearch =
