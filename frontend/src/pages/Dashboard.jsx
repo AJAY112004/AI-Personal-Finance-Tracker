@@ -131,21 +131,21 @@ function Dashboard() {
 
           <StatCard
             title="Total Balance"
-            value={`₹${dashboardData.summary.balance.toLocaleString()}`}
+            value={`${dashboardData.summary.balance.toLocaleString()}`}
             subtitle="+2.4% vs last month"
             type="up"
           />
 
           <StatCard
             title="Monthly Income"
-            value={`₹${dashboardData.summary.income.toLocaleString()}`}
+            value={`${dashboardData.summary.income.toLocaleString()}`}
             subtitle="+5.1%"
             type="up"
           />
 
           <StatCard
             title="Monthly Expense"
-            value={`₹${dashboardData.summary.expense.toLocaleString()}`}
+            value={`${dashboardData.summary.expense.toLocaleString()}`}
             subtitle="-1.2%"
             type="warning"
           />
