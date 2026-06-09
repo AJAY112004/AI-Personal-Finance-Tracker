@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation
+} from "react-router-dom";
 
 import {
   LayoutDashboard,
@@ -54,28 +57,28 @@ function SideBar() {
 
   const menuItems = [
     {
-      path: "/Dashboard",
-      icon: <LayoutDashboard size={18} />,
+      path: "/dashboard",
+      icon: <LayoutDashboard size={20} />,
       label: "Dashboard"
     },
     {
-      path: "/Transactions",
-      icon: <ReceiptText size={18} />,
+      path: "/transactions",
+      icon: <ReceiptText size={20} />,
       label: "Transactions"
     },
     {
-      path: "/Budgets",
-      icon: <Wallet size={18} />,
+      path: "/budgets",
+      icon: <Wallet size={20} />,
       label: "Budgets"
     },
     {
-      path: "/Analytics",
-      icon: <BarChart3 size={18} />,
+      path: "/analytics",
+      icon: <BarChart3 size={20} />,
       label: "Analytics"
     },
     {
-      path: "/AIInsights",
-      icon: <Sparkles size={18} />,
+      path: "/ai-insights",
+      icon: <Sparkles size={20} />,
       label: "AI Insights"
     }
   ];
@@ -84,20 +87,23 @@ function SideBar() {
 
     <aside className="sidebar">
 
+      {/* TOP SECTION */}
+
       <div>
 
         <div className="logo">
 
           <h1>
-            {company.name}
+            {company?.name || "Lumina"}
           </h1>
 
           <h2>
-            {company.subtitle}
+            {company?.subtitle || "Finance"}
           </h2>
 
           <p>
-            {company.description}
+            {company?.description ||
+              "Institutional Wealth"}
           </p>
 
         </div>
@@ -130,18 +136,20 @@ function SideBar() {
 
       </div>
 
+      {/* BOTTOM SECTION */}
+
       <div className="bottom-menu">
 
         <Link
-          to="/Profile"
+          to="/profile"
           className={
-            location.pathname === "/Profile"
+            location.pathname === "/profile"
               ? "menu-item active"
               : "menu-item"
           }
         >
 
-          <User size={18} />
+          <User size={20} />
 
           <span>
             Profile
@@ -150,11 +158,11 @@ function SideBar() {
         </Link>
 
         <Link
-          to="/"
+          to="/logout"
           className="menu-item"
         >
 
-          <LogOut size={18} />
+          <LogOut size={20} />
 
           <span>
             Logout

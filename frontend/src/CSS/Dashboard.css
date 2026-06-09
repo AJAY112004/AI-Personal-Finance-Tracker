@@ -1,6 +1,7 @@
 .dashboard-content{
 padding:30px;
-margin-left:280px;
+margin-top:-50px;
+margin-left:210px;
 background:#f8fafc;
 min-height:calc(100vh - 80px);
 }

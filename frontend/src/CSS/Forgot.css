@@ -1,168 +1,216 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial, sans-serif;
-    background:#f5f2fa;
-}
-
 .forgot-page{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:40px;
-    padding:40px;
+width:100%;
+min-height:100vh;
+
+background:#f6f4fb;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+padding-top:20px;
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
+/* LOGO */
+
+.forgot-logo{
+display:flex;
+align-items:center;
+gap:8px;
+
+font-size:28px;
+font-weight:600;
+
+color:#5B3FD4;
+
+margin-bottom:40px;
 }
 
-.logo-box{
-    width:34px;
-    height:34px;
-    background:#5b3fa8;
-    color:white;
-    border-radius:10px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.logo-icon{
+width:26px;
+height:26px;
+
+border-radius:8px;
+
+background:#5B3FD4;
+color:white;
+
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.brand h1{
-    color:#5137a3;
-    font-size:36px;
-}
+/* CARD */
 
 .forgot-card{
+width:460px;
+max-width:90%;
 
-    width:520px;
-    background:white;
-    border-radius:22px;
-    padding:50px;
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.08);
-    text-align:center;
+background:white;
+
+border-radius:22px;
+
+padding:40px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.08);
+
+display:flex;
+flex-direction:column;
+align-items:center;
 }
 
-.icon-circle{
+.forgot-icon{
+width:56px;
+height:56px;
 
-    width:64px;
-    height:64px;
-    margin:auto;
-    border-radius:50%;
-    background:#efe8ff;
-    color:#5b3fa8;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:32px;
-    margin-bottom:25px;
+border-radius:50%;
+
+background:#ede9fe;
+color:#5B3FD4;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+margin-bottom:20px;
 }
 
-.forgot-card h2{
-    font-size:42px;
-    color:#222;
-    margin-bottom:18px;
+.forgot-card h1{
+font-size:42px;
+font-weight:700;
+
+color:#1f2937;
+
+margin-bottom:12px;
 }
 
-.subtitle{
+.forgot-card p{
+text-align:center;
 
-    color:#777;
-    line-height:1.7;
-    margin-bottom:35px;
+font-size:15px;
+line-height:1.7;
+
+color:#6b7280;
+
+margin-bottom:28px;
 }
 
-form{
-    text-align:left;
+.forgot-card form{
+width:100%;
 }
 
-label{
+.forgot-card label{
+display:block;
 
-    font-size:15px;
-    font-weight:700;
-    color:#444;
-    margin-bottom:10px;
-    display:block;
+font-size:14px;
+font-weight:600;
+
+margin-bottom:8px;
+
+color:#374151;
 }
+
+/* INPUT */
 
 .input-box{
+height:52px;
 
-    position:relative;
-    margin-bottom:25px;
+border:1px solid #dbe1ea;
+border-radius:12px;
+
+display:flex;
+align-items:center;
+
+padding:0 14px;
+gap:10px;
+
+margin-bottom:22px;
+
+background:white;
 }
 
-.mail-icon{
-
-    position:absolute;
-    top:18px;
-    left:18px;
-    color:#aaa;
+.input-box svg{
+color:#9ca3af;
 }
 
-input{
+.input-box input{
+width:100%;
 
-    width:100%;
-    height:56px;
-    border:2px solid #e3dff0;
-    border-radius:12px;
-    padding-left:50px;
-    font-size:15px;
-    outline:none;
+border:none;
+outline:none;
+
+background:none;
+
+font-size:15px;
 }
 
-input:focus{
-    border-color:#5b3fa8;
+.input-box input::placeholder{
+color:#9ca3af;
 }
+
+/* BUTTON */
 
 .reset-btn{
-    width:100%;
-    height:58px;
-    border:none;
-    background:#5b3fa8;
-    color:white;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
+width:100%;
+height:54px;
+
+border:none;
+border-radius:14px;
+
+background:
+linear-gradient(
+90deg,
+#5B3FD4,
+#7C5CFF
+);
+
+color:white;
+
+font-size:15px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
 }
+
 .reset-btn:hover{
-    background:#4b3291;
+opacity:.95;
 }
 
-.back-btn{
-    border:none;
-    background:none;
-    color:#222;
-    cursor:pointer;
-    font-size:16px;
-    display:flex;
-    gap:10px;
+/* BACK LINK */
+
+.back-link{
+margin-top:28px;
+
+text-decoration:none;
+
+font-size:15px;
+font-weight:500;
+
+color:#374151;
 }
 
-@media(max-width:700px){
+.back-link:hover{
+color:#5B3FD4;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
 
 .forgot-card{
-    width:100%;
+padding:30px 24px;
 }
 
-.brand h1{
-    font-size:28px;
+.forgot-card h1{
+font-size:32px;
+text-align:center;
 }
 
-.forgot-card h2{
-    font-size:32px;
+.forgot-logo{
+font-size:22px;
 }
 
 }

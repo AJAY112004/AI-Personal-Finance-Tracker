@@ -1,28 +1,27 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-import logo from "../assets/loginSide.png";
-
-import "../CSS/login.css";
-
+import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaApple } from "react-icons/fa";
+import { Eye, EyeOff } from "lucide-react";
+import loginSide from "../assets/loginSide.png";
+import "../CSS/Login.css";
 
 function Login() {
 
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] =
+    useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const [formData, setFormData] =
+    useState({
+      email: "",
+      password: "",
+      remember: false,
+    });
 
   const handleChange = (e) => {
 
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } =
+      e.target;
 
     setFormData({
       ...formData,
@@ -38,125 +37,104 @@ function Login() {
 
     e.preventDefault();
 
-    try {
+    console.log(
+      "Ready for backend login:",
+      formData
+    );
 
-      /*
-      Replace this with your Django Login API
+    /*
+    Backend Integration
+
+    try {
 
       const response = await axios.post(
         "http://127.0.0.1:8000/api/login/",
         formData
       );
-      */
 
-      console.log("Login Data:", formData);
+    } catch(error) {
 
-      navigate("/dashboard");
-
-    } catch (error) {
-
-      console.error(
-        "Login Error:",
-        error
-      );
+      console.error(error);
 
     }
+    */
 
   };
 
   return (
 
-    <div className="main-container">
+    <div className="login-page">
 
-      {/* LEFT SIDE */}
+      {/* LEFT PANEL */}
 
-      <div className="left-section">
+      <div className="login-left">
 
-        <img
-          src={logo}
-          alt="Finance Dashboard"
-        />
+        <div className="login-image-card">
+
+          <img
+            src={loginSide}
+            alt="Finance"
+          />
+
+        </div>
 
       </div>
 
-      {/* RIGHT SIDE */}
+      {/* RIGHT PANEL */}
 
-      <div className="right-section">
+      <div className="login-right">
 
         <form
-          className="login-form"
+          className="login-card"
           onSubmit={handleSubmit}
         >
-
-          {/* TITLE */}
 
           <h1>
             Lumina Finance
           </h1>
 
           <p className="subtitle">
-
             Sign in to manage your
             institutional portfolio.
-
           </p>
 
-          {/* GOOGLE */}
+          {/* SOCIAL LOGIN */}
 
-          <div className="social-container">
+          <button
+            type="button"
+            className="social-btn"
+          >
 
-            <button
-              type="button"
-              className="social-btn"
-            >
+            <FcGoogle size={20} />
 
-              <FcGoogle size={22} />
+            Continue with Google
 
-              <span>
-                Continue with Google
-              </span>
+          </button>
 
-            </button>
+          <button
+            type="button"
+            className="social-btn"
+          >
 
-            {/* APPLE */}
+            <FaApple size={18} />
 
-            <button
-              type="button"
-              className="social-btn"
-            >
+            Continue with Apple
 
-              <FaApple size={20} />
-
-              <span>
-                Continue with Apple
-              </span>
-
-            </button>
-
-          </div>
-
-          {/* DIVIDER */}
+          </button>
 
           <div className="divider">
-
-            <span>
-              or sign in with email
-            </span>
-
+            or sign in with email
           </div>
 
           {/* EMAIL */}
 
-          <label htmlFor="email">
-
+          <label>
             Email Address
-
           </label>
-
+          
           <input
-            id="email"
-            name="email"
             type="email"
+            name="email"
             placeholder="name@company.com"
             value={formData.email}
             onChange={handleChange}
@@ -165,22 +143,19 @@ function Login() {
 
           {/* PASSWORD */}
 
-          <label htmlFor="password">
-
+          <label>
             Password
-
           </label>
 
-          <div className="password-box">
+          {/* <div className="password-box"> */}
 
             <input
-              id="password"
-              name="password"
               type={
                 showPassword
                   ? "text"
                   : "password"
               }
+              name="password"
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}
@@ -197,78 +172,55 @@ function Login() {
               }
             >
 
-              {showPassword ? (
-                <FaEyeSlash />
-              ) : (
-                <FaEye />
-              )}
+              {showPassword
+                ? <EyeOff size={18} />
+                : <Eye size={18} />}
 
             </button>
 
-          </div>
+          {/* </div> */}
 
-          {/* REMEMBER */}
+          <div className="login-options">
 
-          <div className="bottom-row">
-
-            <div className="remember">
+            <label className="remember">
 
               <input
-                id="remember"
-                name="remember"
                 type="checkbox"
+                name="remember"
                 checked={
                   formData.remember
                 }
                 onChange={handleChange}
               />
 
-              <label htmlFor="remember">
+              Remember me
 
-                Remember me
+            </label>
 
-              </label>
-
-            </div>
-
-            <Link
-              to="/forgot"
-              className="forgot-link"
-            >
-
+            <Link to="/forgot">
               Forgot Password?
-
             </Link>
 
           </div>
 
-          {/* LOGIN BUTTON */}
-
           <button
             type="submit"
-            className="signin-btn"
+            className="login-btn"
           >
-
-            Sign In
-
+            <Link to="/Dashboard">
+              Sign In
+            </Link>
           </button>
 
-          {/* FOOTER */}
+          <div className="signup-link">
 
-          <p className="footer-text">
+            Don't have an account?
 
-            Don't have an account?{" "}
-
-            <Link
-              to="/create-account"
-              className="request-link"
-            >
-
-              Create Account
-
+            <Link to="/create-account">
+              Request Access
             </Link>
 
-          </p>
+          </div>
 
         </form>
 

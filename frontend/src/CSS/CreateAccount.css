@@ -1,240 +1,260 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
-
-.signup-container{
+.create-page{
 display:flex;
 height:100vh;
-background:#f5f3fb;
+background:#f7f5fb;
 }
 
 /* LEFT */
 
-.signup-left{
+.create-left{
 flex:1;
-background:#f0ebfa;
-padding:30px;
+background:#ece7fb;
+padding:30px 40px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-border-right:1px solid #e5e7eb;
 }
 
 .brand{
-font-weight:700;
-color:#5b3fd4;
-font-size:18px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:20px;
+font-weight:600;
+color:#5B3FD4;
 }
 
 .hero-card{
 width:520px;
-background:white;
-padding:35px;
-border-radius:24px;
-margin:auto;
+max-width:100%;
+background:#f6f2ff;
+border-radius:22px;
+padding:40px;
 box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-.hero-card h1{
-font-size:46px;
+.hero-content h2{
+font-size:42px;
+font-weight:700;
+line-height:1.15;
 margin-bottom:20px;
+color:#2c2c2c;
 }
 
-.hero-card p{
+.hero-content p{
+font-size:16px;
+line-height:1.7;
 color:#6b7280;
-line-height:1.8;
-margin-bottom:30px;
 }
 
 .chart-section{
+margin-top:40px;
 position:relative;
 }
 
 .growth-card{
 position:absolute;
-top:-20px;
-right:20px;
+right:0;
+top:-10px;
 background:white;
-padding:15px;
+padding:16px 20px;
 border-radius:12px;
-box-shadow:0 8px 20px rgba(0,0,0,.1);
-z-index:2;
+box-shadow:0 10px 20px rgba(0,0,0,.08);
 }
 
-.growth-card h2{
-font-size:42px;
+.growth-card span{
+font-size:13px;
+color:#6b7280;
+}
+
+.growth-card h3{
+font-size:34px;
+margin-top:5px;
+color:#4f46e5;
 }
 
 .bars{
 display:flex;
 align-items:flex-end;
-gap:10px;
-height:220px;
+gap:14px;
+height:180px;
 margin-top:40px;
 }
 
 .bar{
-width:60px;
-background:#7c5cff;
+width:70px;
 border-radius:8px 8px 0 0;
 }
 
-.bar1{height:60px;}
-.bar2{height:100px;}
-.bar3{height:140px;}
-.bar4{height:180px;}
-.bar5{height:220px;}
+.b1{height:55px;background:#c7b8f7;}
+.b2{height:90px;background:#b49df4;}
+.b3{height:120px;background:#9e82f0;}
+.b4{height:150px;background:#8665e9;}
+.b5{height:180px;background:#6c4df6;}
 
 .copyright{
-font-size:14px;
-color:#777;
+font-size:13px;
+color:#6b7280;
 }
 
 /* RIGHT */
 
-.signup-right{
+.create-right{
 flex:1;
 display:flex;
 justify-content:center;
 align-items:center;
+padding:40px;
+background:white;
 }
 
-.signup-form{
-width:500px;
+.create-form{
+width:420px;
 }
 
-.signup-form h2{
-font-size:54px;
-margin-bottom:0px;
+.create-form h1{
+font-size:52px;
+font-weight:700;
+margin-bottom:10px;
+color:#111827;
 }
 
 .subtitle{
 color:#6b7280;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
-.signup-form label{
+.create-form label{
 display:block;
-font-weight:600;
 margin-bottom:8px;
-margin-top:16px;
+font-size:14px;
+font-weight:600;
+color:#374151;
 }
 
-.signup-form input{
-width:100%;
+.input-box{
 height:52px;
-border:1px solid #d1d5db;
+border:1px solid #dbe1ea;
 border-radius:12px;
+display:flex;
+align-items:center;
 padding:0 14px;
+gap:10px;
+margin-bottom:20px;
+}
+
+.input-box input{
+width:100%;
+border:none;
+outline:none;
+background:none;
 font-size:15px;
 }
 
-.password-box{
-position:relative;
-}
-
-.password-box input{
-padding-right:50px;
-}
-
 .eye-btn{
-position:absolute;
-right:15px;
-top:50%;
-transform:translateY(-50%);
 border:none;
 background:none;
 cursor:pointer;
 }
 
-small{
+.create-form small{
 display:block;
-margin-top:8px;
-color:#6b7280;
+margin-bottom:18px;
+color:#9ca3af;
 }
 
 .create-btn{
 width:100%;
 height:54px;
-margin-top:18px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 background:linear-gradient(
 90deg,
-#5b3fd4,
-#7c5cff
+#5B3FD4,
+#8B73FF
 );
 color:white;
-font-weight:700;
+font-weight:600;
 cursor:pointer;
+margin-bottom:30px;
 }
 
 .divider{
-display:flex;
-align-items:center;
-margin:25px 0;
+text-align:center;
+color:#9ca3af;
+font-size:13px;
+margin-bottom:20px;
+position:relative;
 }
 
 .divider::before,
 .divider::after{
 content:"";
-flex:1;
+position:absolute;
+top:50%;
+width:35%;
 height:1px;
-background:#ddd;
+background:#e5e7eb;
 }
 
-.divider span{
-padding:0 12px;
-color:#777;
+.divider::before{
+left:0;
 }
 
-.social-container{
+.divider::after{
+right:0;
+}
+
+.social-row{
 display:flex;
 gap:12px;
+margin-bottom:25px;
 }
 
 .social-btn{
 flex:1;
-height:50px;
-border:1px solid #ddd;
-background:white;
+height:48px;
+border:1px solid #dbe1ea;
 border-radius:12px;
+background:white;
 display:flex;
 align-items:center;
 justify-content:center;
 gap:8px;
 cursor:pointer;
+font-weight:500;
 }
 
-.signin-text{
-margin-top:25px;
+.signin-link{
 text-align:center;
+color:#6b7280;
 }
 
-.signin-text a{
-margin-left:6px;
-color:#5b3fd4;
+.signin-link a{
+margin-left:5px;
+color:#5B3FD4;
 font-weight:600;
 text-decoration:none;
 }
 
-@media(max-width:992px){
+@media(max-width:1024px){
 
-.signup-left{
+.create-page{
+flex-direction:column;
+height:auto;
+}
+
+.create-left{
 display:none;
 }
 
-.signup-right{
-width:100%;
-padding:20px;
+.create-right{
+padding:60px 20px;
 }
 
-.signup-form{
+.create-form{
 width:100%;
-max-width:500px;
+max-width:420px;
 }
 
 }

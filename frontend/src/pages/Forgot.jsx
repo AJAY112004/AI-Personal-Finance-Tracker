@@ -1,68 +1,106 @@
-import "../CSS/Forgot.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Mail, ShieldCheck } from "lucide-react";
 
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaEnvelope,
-} from "react-icons/fa";
-
-import { IoReloadCircle } from "react-icons/io5";
+import "../CSS/Forgot.css";
 
 function Forgot() {
+
+  const [email, setEmail] =
+    useState("");
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    console.log(
+      "Ready for backend password reset:",
+      email
+    );
+
+    /*
+    Backend Integration
+
+    try {
+
+      await axios.post(
+        "http://127.0.0.1:8000/api/forgot-password/",
+        {
+          email
+        }
+      );
+
+    } catch(error) {
+
+      console.error(error);
+
+    }
+    */
+
+  };
+
   return (
+
     <div className="forgot-page">
 
-      <div className="brand">
+      {/* LOGO */}
 
-        <div className="logo-box">
-          ✦
+      <div className="forgot-logo">
+
+        <div className="logo-icon">
+
+          <ShieldCheck size={14} />
+
         </div>
 
-        <h1>Lumina Finance</h1>
+        <span>
+          Lumina Finance
+        </span>
 
       </div>
 
+      {/* CARD */}
+
       <div className="forgot-card">
 
-        <div className="icon-circle">
-          <IoReloadCircle />
+        <div className="forgot-icon">
+
+          <ShieldCheck size={26} />
+
         </div>
 
-        <h2>
+        <h1>
           Reset your password
-        </h2>
+        </h1>
 
-        <p className="subtitle">
-
-          Enter the email associated
-          with your account and
-          we'll send instructions
+        <p>
+          Enter the email associated with your
+          account and we'll send an instruction
           to reset it.
-
         </p>
 
         <form
-          onSubmit={(e) =>
-            e.preventDefault()
-          }
+          onSubmit={handleSubmit}
         >
 
-          <label htmlFor="email">
+          <label>
             Email Address
           </label>
 
           <div className="input-box">
 
-            <FaEnvelope
-              className="mail-icon"
-            />
+            <Mail size={18} />
 
             <input
-              id="email"
               type="email"
-              required
               placeholder="name@organization.com"
+              value={email}
+              onChange={(e) =>
+                setEmail(
+                  e.target.value
+                )
+              }
+              required
             />
 
           </div>
@@ -71,25 +109,28 @@ function Forgot() {
             type="submit"
             className="reset-btn"
           >
-            Send Reset Link
 
-            <FaArrowRight />
+            Send Reset Link →
+
           </button>
 
         </form>
 
       </div>
+
       <Link
-        to="/login"
+        to="/"
         className="back-link"
       >
-        <FaArrowLeft />
 
-        Back to Login
+        ← Back to Login
+
       </Link>
 
     </div>
+
   );
+
 }
 
 export default Forgot;
