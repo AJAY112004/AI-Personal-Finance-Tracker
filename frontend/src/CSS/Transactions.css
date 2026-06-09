@@ -100,7 +100,7 @@ min-height:calc(100vh - 80px);
 
 .search-icon {
   position: absolute;
-  left: -35px;
+  left: -90px;
   top: 50%;
   transform: translateY(-50%);
   color: #94a3b8;
