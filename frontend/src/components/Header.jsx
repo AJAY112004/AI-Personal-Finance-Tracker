@@ -5,7 +5,6 @@ import {
   Search,
   Bell,
   Moon,
-  Settings
 } from "lucide-react";
 
 import "../CSS/Header.css";
@@ -76,12 +75,6 @@ function Header() {
         <button className="header-icon">
 
           <Moon size={22} />
-
-        </button>
-
-        <button className="header-icon">
-
-          <Settings size={22} />
 
         </button>
 
