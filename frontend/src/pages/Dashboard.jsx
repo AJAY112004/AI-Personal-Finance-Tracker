@@ -19,50 +19,19 @@ function Dashboard() {
 
   const [dashboardData, setDashboardData] = useState({
     summary: {
-      balance: 2450890,
-      income: 145200,
-      expense: 32450,
-      savings: 77.6,
+      balance: 0,
+      income: 0,
+      expense: 0,
+      savings: 0,
     },
-
-    insight:
-      "Your operational expenses have decreased by 4% this quarter, largely driven by optimized vendor contracts.",
-
+    insight: "",
     allocation: {
-      equities: 65,
-      fixed_income: 25,
-      cash: 10,
+      equities: 0,
+      fixed_income: 0,
+      cash: 0,
     },
-
-    chart: [
-      { month: "Jan", value: 150000 },
-      { month: "Feb", value: 170000 },
-      { month: "Mar", value: 145000 },
-      { month: "Apr", value: 180000 },
-      { month: "May", value: 220000 },
-      { month: "Jun", value: 280000 },
-    ],
-
-    transactions: [
-      {
-        entity: "Acme Corp Dividend",
-        date: "Oct 24, 2023",
-        amount: 12500,
-        status: "Completed",
-      },
-      {
-        entity: "Stripe Payment",
-        date: "Oct 22, 2023",
-        amount: -4230,
-        status: "Completed",
-      },
-      {
-        entity: "Wire Transfer",
-        date: "Oct 21, 2023",
-        amount: -50000,
-        status: "Processing",
-      },
-    ],
+    chart: [],
+    transactions: [],
   });
 
   useEffect(() => {
@@ -79,8 +48,9 @@ function Dashboard() {
 
       } catch (error) {
 
-        console.log(
-          "Backend not connected. Using mock data."
+        console.error(
+          "Dashboard Error:",
+          error
         );
 
       } finally {
@@ -98,11 +68,19 @@ function Dashboard() {
   if (loading) {
 
     return (
+
       <Layout>
+
         <div className="dashboard-content">
-          <h2>Loading Dashboard...</h2>
+
+          <h2>
+            Loading Dashboard...
+          </h2>
+
         </div>
+
       </Layout>
+
     );
 
   }
@@ -117,7 +95,9 @@ function Dashboard() {
 
         <div className="dashboard-header">
 
-          <h1>Overview</h1>
+          <h1>
+            Overview
+          </h1>
 
           <p>
             Welcome back. Here is your portfolio summary.
@@ -131,53 +111,67 @@ function Dashboard() {
 
           <StatCard
             title="Total Balance"
-            value={`${dashboardData.summary.balance.toLocaleString()}`}
-            subtitle="+2.4% vs last month"
+            value={`${(
+              dashboardData?.summary?.balance || 0
+            ).toLocaleString()}`}
+            subtitle="Current balance"
             type="up"
           />
 
           <StatCard
             title="Monthly Income"
-            value={`${dashboardData.summary.income.toLocaleString()}`}
-            subtitle="+5.1%"
+            value={`${(
+              dashboardData?.summary?.income || 0
+            ).toLocaleString()}`}
+            subtitle="Income this month"
             type="up"
           />
 
           <StatCard
             title="Monthly Expense"
-            value={`${dashboardData.summary.expense.toLocaleString()}`}
-            subtitle="-1.2%"
+            value={`${(
+              dashboardData?.summary?.expense || 0
+            ).toLocaleString()}`}
+            subtitle="Expenses this month"
             type="warning"
           />
 
           <StatCard
             title="Savings Rate"
-            value={`${dashboardData.summary.savings}%`}
-            subtitle="+0.8%"
+            value={`${dashboardData?.summary?.savings || 0}%`}
+            subtitle="Savings percentage"
             type="target"
           />
 
         </div>
 
-        {/* MIDDLE SECTION */}
+        {/* CHART + SIDE PANEL */}
 
         <div className="middle-section">
+
+          {/* CHART */}
 
           <div className="capital-card">
 
             <div className="capital-top">
 
-              <h3>Capital Flow</h3>
+              <h3>
+                Capital Flow
+              </h3>
 
               <div className="time-buttons">
 
-                <button>1M</button>
+                <button>
+                  1M
+                </button>
 
                 <button className="active-time">
                   6M
                 </button>
 
-                <button>1Y</button>
+                <button>
+                  1Y
+                </button>
 
               </div>
 
@@ -185,96 +179,132 @@ function Dashboard() {
 
             <div className="chart-wrapper">
 
-              <ResponsiveContainer
-                width="100%"
-                height={300}
-              >
+              {dashboardData.chart.length > 0 ? (
 
-                <AreaChart
-                  data={dashboardData.chart}
+                <ResponsiveContainer
+                  width="100%"
+                  height={300}
                 >
 
-                  <defs>
+                  <AreaChart
+                    data={dashboardData.chart}
+                  >
 
-                    <linearGradient
-                      id="flowGradient"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
+                    <defs>
 
-                      <stop
-                        offset="5%"
-                        stopColor="#7C5CFF"
-                        stopOpacity={0.7}
-                      />
+                      <linearGradient
+                        id="flowGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
 
-                      <stop
-                        offset="95%"
-                        stopColor="#7C5CFF"
-                        stopOpacity={0.05}
-                      />
+                        <stop
+                          offset="5%"
+                          stopColor="#7C5CFF"
+                          stopOpacity={0.7}
+                        />
 
-                    </linearGradient>
+                        <stop
+                          offset="95%"
+                          stopColor="#7C5CFF"
+                          stopOpacity={0.05}
+                        />
 
-                  </defs>
+                      </linearGradient>
 
-                  <Tooltip />
+                    </defs>
 
-                  <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke="#7C5CFF"
-                    strokeWidth={3}
-                    fill="url(#flowGradient)"
-                  />
+                    <Tooltip />
 
-                </AreaChart>
+                    <Area
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#7C5CFF"
+                      strokeWidth={3}
+                      fill="url(#flowGradient)"
+                    />
 
-              </ResponsiveContainer>
+                  </AreaChart>
+
+                </ResponsiveContainer>
+
+              ) : (
+
+                <div className="empty-chart">
+
+                  No Chart Data Available
+
+                </div>
+
+              )}
 
             </div>
 
           </div>
 
+          {/* RIGHT PANEL */}
+
           <div className="right-panel">
 
             <div className="follow-card">
 
-              <h4>AI Insight</h4>
+              <h4>
+                AI Insight
+              </h4>
 
               <p>
-                {dashboardData.insight}
+
+                {dashboardData.insight ||
+                  "No insights available."}
+
               </p>
 
             </div>
 
             <div className="follow-card">
 
-              <h4>Allocation</h4>
+              <h4>
+                Allocation
+              </h4>
 
               <ul className="allocation-list">
 
                 <li>
-                  <span>Equities</span>
+
                   <span>
-                    {dashboardData.allocation.equities}%
+                    Equities
                   </span>
+
+                  <span>
+                    {dashboardData?.allocation?.equities || 0}%
+                  </span>
+
                 </li>
 
                 <li>
-                  <span>Fixed Income</span>
+
                   <span>
-                    {dashboardData.allocation.fixed_income}%
+                    Fixed Income
                   </span>
+
+                  <span>
+                    {dashboardData?.allocation?.fixed_income || 0}%
+                  </span>
+
                 </li>
 
                 <li>
-                  <span>Cash</span>
+
                   <span>
-                    {dashboardData.allocation.cash}%
+                    Cash
                   </span>
+
+                  <span>
+                    {dashboardData?.allocation?.cash || 0}%
+                  </span>
+
                 </li>
 
               </ul>
@@ -291,9 +321,13 @@ function Dashboard() {
 
           <div className="transactions-header">
 
-            <h2>Recent Transactions</h2>
+            <h2>
+              Recent Transactions
+            </h2>
 
-            <span>View All</span>
+            <span>
+              View All
+            </span>
 
           </div>
 
@@ -302,52 +336,79 @@ function Dashboard() {
             <thead>
 
               <tr>
+
                 <th>ENTITY</th>
                 <th>DATE</th>
                 <th>AMOUNT</th>
                 <th>STATUS</th>
+
               </tr>
 
             </thead>
 
             <tbody>
 
-              {dashboardData.transactions.map(
-                (transaction, index) => (
+              {dashboardData.transactions.length > 0 ? (
 
-                  <tr key={index}>
+                dashboardData.transactions.map(
+                  (transaction, index) => (
 
-                    <td>
-                      {transaction.entity}
-                    </td>
+                    <tr key={index}>
 
-                    <td>
-                      {transaction.date}
-                    </td>
+                      <td>
+                        {transaction.entity}
+                      </td>
 
-                    <td>
-                      ₹{transaction.amount.toLocaleString()}
-                    </td>
+                      <td>
+                        {transaction.date}
+                      </td>
 
-                    <td>
+                      <td>
+                        ₹
+                        {Number(
+                          transaction.amount
+                        ).toLocaleString()}
+                      </td>
 
-                      <span
-                        className={`status ${
-                          transaction.status === "Completed"
-                            ? "completed"
-                            : "processing"
-                        }`}
-                      >
+                      <td>
 
-                        {transaction.status}
+                        <span
+                          className={`status ${
+                            transaction.status === "Completed"
+                              ? "completed"
+                              : "processing"
+                          }`}
+                        >
 
-                      </span>
+                          {transaction.status}
 
-                    </td>
+                        </span>
 
-                  </tr>
+                      </td>
 
+                    </tr>
+
+                  )
                 )
+
+              ) : (
+
+                <tr>
+
+                  <td
+                    colSpan="4"
+                    style={{
+                      textAlign: "center",
+                      padding: "30px",
+                    }}
+                  >
+
+                    No Transactions Found
+
+                  </td>
+
+                </tr>
+
               )}
 
             </tbody>

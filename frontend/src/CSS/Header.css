@@ -7,7 +7,7 @@ align-items:center;
 justify-content:space-between;
 padding:30px 30px;
 position:sticky;
-margin-left:200px;
+margin-left:220px;
 top:0;
 z-index:100;
 }
@@ -36,7 +36,7 @@ font-size:15px;
 }
 
 .search-icon{
-margin-left:50px;
+margin-left:100px;
 color:#94a3b8;
 }
 

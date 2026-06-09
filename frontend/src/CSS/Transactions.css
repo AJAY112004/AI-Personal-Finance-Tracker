@@ -1,6 +1,6 @@
 .transactions-content {
 padding:20px;
-margin-top:-50px;
+margin-top:-10px;
 margin-left:220px;
 background:#f8fafc;
 min-height:calc(100vh - 80px);
@@ -100,7 +100,7 @@ min-height:calc(100vh - 80px);
 
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: -35px;
   top: 50%;
   transform: translateY(-50%);
   color: #94a3b8;

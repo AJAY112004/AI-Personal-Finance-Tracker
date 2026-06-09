@@ -19,29 +19,35 @@ import "../CSS/Profile.css";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [currentPassword, setCurrentPassword] = useState("••••••••");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [notifications, setNotifications] = useState({
-    emailAlerts: true,
+    emailAlerts: false,
     pushNotifications: false,
-    smsSecuirty: true,
+    smsSecurity: false,
   });
 
-  const fetchProfile = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/api/profile/");
-      setProfile(response.data);
-    } catch (error) {
-      console.error("Profile Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [loading, setLoading] = useState(true);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/profile/");
+        setProfile(response.data);
+        if (response.data.notifications) {
+          setNotifications(response.data.notifications);
+        }
+      } catch (error) {
+        setError("Failed to load profile.");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProfile();
   }, []);
 
@@ -49,19 +55,16 @@ function Profile() {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  if (loading) {
-    return (
-      <Layout>
-        <div className="profile-loading">
-          <h2 className="loading-text">Loading Profile...</h2>
-        </div>
-      </Layout>
-    );
-  }
-
   return (
     <Layout>
       <div className="profile-page">
+
+        {/* ── API ERROR BANNER ── */}
+        {error && (
+          <div className="error-banner">
+            {error} — displaying page without live data.
+          </div>
+        )}
 
         {/* ── PAGE HEADER ── */}
         <div className="page-header">
@@ -85,38 +88,46 @@ function Profile() {
 
             {/* Avatar */}
             <div className="avatar-wrapper">
-              <img
-                src={profile?.avatar || "https://i.pravatar.cc/300?img=47"}
-                alt="Profile"
-                className="profile-image"
-              />
+              {profile?.avatar && (
+                <img
+                  src={profile.avatar}
+                  alt="Profile"
+                  className="profile-image"
+                />
+              )}
               <button className="edit-avatar-btn">
                 <Pencil size={13} />
               </button>
             </div>
 
             {/* Name & title */}
-            <h2 className="profile-name">
-              {profile?.name || "Eleanor Vance"}
-            </h2>
-            <p className="profile-title">
-              {profile?.title || "Managing Director, Wealth Strategies"}
-            </p>
+            {profile?.name && (
+              <h2 className="profile-name">{profile.name}</h2>
+            )}
+            {profile?.title && (
+              <p className="profile-title">{profile.title}</p>
+            )}
 
             {/* Info items */}
             <div className="profile-info">
-              <div className="info-item">
-                <Mail size={15} className="info-icon" />
-                <span>{profile?.email || "e.vance@luminafinance.com"}</span>
-              </div>
-              <div className="info-item">
-                <MapPin size={15} className="info-icon" />
-                <span>{profile?.location || "New York, NY"}</span>
-              </div>
-              <div className="info-item">
-                <IdCard size={15} className="info-icon" />
-                <span>Employee ID: LMN-{profile?.employeeId || "8842"}</span>
-              </div>
+              {profile?.email && (
+                <div className="info-item">
+                  <Mail size={15} className="info-icon" />
+                  <span>{profile.email}</span>
+                </div>
+              )}
+              {profile?.location && (
+                <div className="info-item">
+                  <MapPin size={15} className="info-icon" />
+                  <span>{profile.location}</span>
+                </div>
+              )}
+              {profile?.employeeId && (
+                <div className="info-item">
+                  <IdCard size={15} className="info-icon" />
+                  <span>Employee ID: LMN-{profile.employeeId}</span>
+                </div>
+              )}
             </div>
 
             {/* ── NOTIFICATIONS ── */}
@@ -168,8 +179,8 @@ function Profile() {
                   <label className="switch">
                     <input
                       type="checkbox"
-                      checked={notifications.smsSecuirty}
-                      onChange={() => toggleNotification("smsSecuirty")}
+                      checked={notifications.smsSecurity}
+                      onChange={() => toggleNotification("smsSecurity")}
                     />
                     <span className="slider"></span>
                   </label>
@@ -196,32 +207,28 @@ function Profile() {
               </div>
 
               <div className="accounts-grid">
-                {/* Account 1 */}
-                <div className="account-card">
-                  <div className="account-header">
-                    <div className="bank-logo jpmorgan">JP</div>
-                    <div className="account-meta">
-                      <span className="bank-name">JPMorgan Chase</span>
-                      <span className="primary-badge">PRIMARY</span>
+                {profile?.accounts?.length > 0 ? (
+                  profile.accounts.map((account) => (
+                    <div className="account-card" key={account.id}>
+                      <div className="account-header">
+                        <div className={`bank-logo ${account.logoClass}`}>
+                          {account.logoInitials}
+                        </div>
+                        <div className="account-meta">
+                          <span className="bank-name">{account.bankName}</span>
+                          {account.isPrimary && (
+                            <span className="primary-badge">PRIMARY</span>
+                          )}
+                        </div>
+                      </div>
+                      <p className="account-type">{account.accountType}</p>
+                      <p className="account-number">{account.accountNumber}</p>
+                      <p className="account-balance">{account.balance}</p>
                     </div>
-                  </div>
-                  <p className="account-type">Corporate Checking</p>
-                  <p className="account-number">•••• •••• •••• 4092</p>
-                  <p className="account-balance">$12,450,000.00</p>
-                </div>
-
-                {/* Account 2 */}
-                <div className="account-card">
-                  <div className="account-header">
-                    <div className="bank-logo goldman">GS</div>
-                    <div className="account-meta">
-                      <span className="bank-name">Goldman Sachs</span>
-                    </div>
-                  </div>
-                  <p className="account-type">Investment Acct ••••</p>
-                  <p className="account-number">•••• •••• •••• 8810</p>
-                  <p className="account-balance">$45,200,500.00</p>
-                </div>
+                  ))
+                ) : (
+                  <p className="no-accounts">No accounts connected yet.</p>
+                )}
               </div>
             </section>
 
@@ -278,7 +285,9 @@ function Profile() {
                 <div className="two-factor-left">
                   <div className="two-factor-title">
                     Two-Factor Authentication (2FA)
-                    <span className="enabled-badge">ENABLED</span>
+                    {profile?.twoFactorEnabled && (
+                      <span className="enabled-badge">ENABLED</span>
+                    )}
                   </div>
                   <p className="two-factor-text">
                     Add an extra layer of security to your account by requiring a
@@ -291,16 +300,24 @@ function Profile() {
               {/* Active Sessions */}
               <div className="sessions-section">
                 <h4 className="sessions-title">Active Sessions</h4>
-                <div className="session-item">
-                  <div className="session-icon">
-                    <Monitor size={16} />
-                  </div>
-                  <div className="session-info">
-                    <span className="session-device">Mac OS Safari</span>
-                    <span className="session-location">New York, US • Current Session</span>
-                  </div>
-                  <span className="session-active-badge">Active</span>
-                </div>
+                {profile?.sessions?.length > 0 ? (
+                  profile.sessions.map((session) => (
+                    <div className="session-item" key={session.id}>
+                      <div className="session-icon">
+                        <Monitor size={16} />
+                      </div>
+                      <div className="session-info">
+                        <span className="session-device">{session.device}</span>
+                        <span className="session-location">{session.location}</span>
+                      </div>
+                      {session.isCurrent && (
+                        <span className="session-active-badge">Active</span>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="no-sessions">No active sessions found.</p>
+                )}
               </div>
 
             </section>

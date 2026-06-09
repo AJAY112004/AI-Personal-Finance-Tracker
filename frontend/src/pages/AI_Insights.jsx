@@ -13,28 +13,32 @@ import {
 
 function AI_Insights() {
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
+
+  const [error, setError] =
+    useState("");
 
   const [insightsData, setInsightsData] =
     useState({
-      aiMessage:
-        "Good morning. I've analyzed your recent portfolio movements and noticed a 15% increase in operational expenses primarily driven by software subscriptions.",
-
-      aiResponse:
-        "Here is the analysis. I found 3 overlapping cloud services contributing to redundant licensing costs.",
-
+      aiMessage: "",
+      userMessage: "",
+      aiResponse: "",
+      quickActions: [],
       recommendation: {
-        title: "Optimize Liquidity",
-        description:
-          "Sweep excess operational cash into short-term treasury yields to capture an estimated $12k this quarter.",
+        title: "",
+        description: "",
       },
-
       spendAnalysis: {
-        marketing: 45200,
-        infrastructure: 28900,
-        score: 92,
+        marketing: 0,
+        infrastructure: 0,
+        score: 0,
       },
+      cashflow: [],
     });
+
+  const [prompt, setPrompt] =
+    useState("");
 
   useEffect(() => {
 
@@ -50,9 +54,11 @@ function AI_Insights() {
 
       } catch (error) {
 
-        console.log(
-          "Using demo data until backend is connected."
+        setError(
+          "Failed to load AI insights."
         );
+
+        console.error(error);
 
       } finally {
 
@@ -66,6 +72,33 @@ function AI_Insights() {
 
   }, []);
 
+  const handleSubmit = async (
+    e
+  ) => {
+
+    e.preventDefault();
+
+    if (!prompt.trim()) return;
+
+    try {
+
+      await axios.post(
+        "http://127.0.0.1:8000/api/ai-insights/chat/",
+        {
+          prompt,
+        }
+      );
+
+      setPrompt("");
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  };
+
   if (loading) {
 
     return (
@@ -73,7 +106,9 @@ function AI_Insights() {
       <Layout>
 
         <div className="loading-page">
+
           Loading AI Insights...
+
         </div>
 
       </Layout>
@@ -87,6 +122,16 @@ function AI_Insights() {
     <Layout>
 
       <div className="ai-page">
+
+        {error && (
+
+          <div className="error-box">
+
+            {error}
+
+          </div>
+
+        )}
 
         {/* HEADER */}
 
@@ -103,7 +148,7 @@ function AI_Insights() {
 
         </div>
 
-        {/* TOP SECTION */}
+        {/* TOP GRID */}
 
         <div className="ai-top-grid">
 
@@ -124,7 +169,7 @@ function AI_Insights() {
                   </h3>
 
                   <span>
-                    ● Analyzing Data
+                    ● Connected
                   </span>
 
                 </div>
@@ -137,51 +182,102 @@ function AI_Insights() {
 
             <div className="chat-body">
 
-              <div className="message ai">
+              {insightsData.aiMessage && (
 
-                {insightsData.aiMessage}
+                <div className="message ai">
 
-              </div>
+                  {insightsData.aiMessage}
 
-              <div className="message user">
+                </div>
 
-                Yes, generate a summary of
-                overlapping tools.
+              )}
 
-              </div>
+              {insightsData.userMessage && (
 
-              <div className="message ai">
+                <div className="message user">
 
-                {insightsData.aiResponse}
+                  {insightsData.userMessage}
 
-              </div>
+                </div>
+
+              )}
+
+              {insightsData.aiResponse && (
+
+                <div className="message ai">
+
+                  {insightsData.aiResponse}
+
+                </div>
+
+              )}
+
+              {!insightsData.aiMessage &&
+                !insightsData.aiResponse && (
+
+                  <div className="empty-state">
+
+                    No AI conversations available.
+
+                  </div>
+
+                )}
 
             </div>
 
-            <div className="chat-input">
+            <form
+              className="chat-input"
+              onSubmit={handleSubmit}
+            >
 
               <input
                 type="text"
-                placeholder="Ask Lumina to analyze specific trends..."
+                placeholder="Ask AI to analyze your finances..."
+                value={prompt}
+                onChange={(e) =>
+                  setPrompt(
+                    e.target.value
+                  )
+                }
               />
 
-              <button>
+              <button
+                type="submit"
+              >
 
                 <Send size={16} />
 
               </button>
 
-            </div>
+            </form>
 
             <div className="quick-actions">
 
-              <button>
-                Forecast Q3 Revenue
-              </button>
+              {insightsData.quickActions?.length > 0 ? (
 
-              <button>
-                Analyze Q2 Spend
-              </button>
+                insightsData.quickActions.map(
+                  (action, index) => (
+
+                    <button
+                      key={index}
+                    >
+
+                      {action}
+
+                    </button>
+
+                  )
+                )
+
+              ) : (
+
+                <span className="empty-actions">
+
+                  No quick actions available
+
+                </span>
+
+              )}
 
             </div>
 
@@ -191,38 +287,46 @@ function AI_Insights() {
 
           <div className="right-panel">
 
+            {/* RECOMMENDATION */}
+
             <div className="recommendation-card">
 
               <div className="priority">
-                High Priority
+
+                Recommendation
+
               </div>
 
-              <TrendingUp size={22} />
+              <TrendingUp
+                size={22}
+              />
 
               <h3>
-                {
-                  insightsData.recommendation
-                    .title
-                }
+
+                {insightsData
+                  ?.recommendation
+                  ?.title ||
+                  "No Recommendation"}
+
               </h3>
 
               <p>
-                {
-                  insightsData.recommendation
-                    .description
-                }
+
+                {insightsData
+                  ?.recommendation
+                  ?.description ||
+                  "No recommendation available."}
+
               </p>
 
-              <a href="/">
-                Execute Sweep →
-              </a>
-
             </div>
+
+            {/* ANALYSIS */}
 
             <div className="analysis-card">
 
               <h4>
-                AI SPEND VELOCITY ANALYSIS
+                AI SPEND ANALYSIS
               </h4>
 
               <div className="metric">
@@ -232,18 +336,22 @@ function AI_Insights() {
                 </span>
 
                 <strong>
-                  $
-                  {
+
+                  ₹
+                  {(
                     insightsData
-                      .spendAnalysis
-                      .marketing
-                  }
+                      ?.spendAnalysis
+                      ?.marketing || 0
+                  ).toLocaleString()}
+
                 </strong>
 
               </div>
 
               <div className="progress">
+
                 <span></span>
+
               </div>
 
               <div className="metric">
@@ -253,18 +361,22 @@ function AI_Insights() {
                 </span>
 
                 <strong>
-                  $
-                  {
+
+                  ₹
+                  {(
                     insightsData
-                      .spendAnalysis
-                      .infrastructure
-                  }
+                      ?.spendAnalysis
+                      ?.infrastructure || 0
+                  ).toLocaleString()}
+
                 </strong>
 
               </div>
 
               <div className="progress second">
+
                 <span></span>
+
               </div>
 
               <div className="score">
@@ -274,12 +386,12 @@ function AI_Insights() {
                 </span>
 
                 <strong>
-                  {
-                    insightsData
-                      .spendAnalysis
-                      .score
-                  }
+
+                  {insightsData
+                    ?.spendAnalysis
+                    ?.score || 0}
                   /100
+
                 </strong>
 
               </div>
@@ -290,7 +402,7 @@ function AI_Insights() {
 
         </div>
 
-        {/* PREDICTIVE CASH FLOW */}
+        {/* CASHFLOW */}
 
         <div className="cashflow-card">
 
@@ -303,8 +415,7 @@ function AI_Insights() {
               </h2>
 
               <p>
-                AI-generated projection
-                based on historical run-rates.
+                AI-generated projections.
               </p>
 
             </div>
@@ -325,8 +436,10 @@ function AI_Insights() {
 
           <div className="cashflow-placeholder">
 
-            Chart will be connected
-            from backend later.
+            {insightsData.cashflow
+              ?.length > 0
+              ? "Cash Flow Data Available"
+              : "No Cash Flow Data Available"}
 
           </div>
 
