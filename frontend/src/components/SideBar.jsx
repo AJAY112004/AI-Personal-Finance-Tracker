@@ -77,7 +77,7 @@ function SideBar() {
       label: "Analytics"
     },
     {
-      path: "/ai-insights",
+      path: "/aiinsights",
       icon: <Sparkles size={20} />,
       label: "AI Insights"
     }
@@ -158,7 +158,7 @@ function SideBar() {
         </Link>
 
         <Link
-          to="/logout"
+          to="/"
           className="menu-item"
         >
 
