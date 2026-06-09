@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { Link, useLocation } from "react-router-dom";
 
 import {
@@ -16,114 +19,147 @@ function SideBar() {
 
   const location = useLocation();
 
+  const [company, setCompany] = useState({
+    name: "Lumina",
+    subtitle: "Finance",
+    description: "Institutional Wealth"
+  });
+
+  useEffect(() => {
+
+    const fetchCompany = async () => {
+
+      try {
+
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/sidebar/"
+        );
+
+        setCompany(response.data);
+
+      } catch (error) {
+
+        console.error(
+          "Sidebar Error:",
+          error
+        );
+
+      }
+
+    };
+
+    fetchCompany();
+
+  }, []);
+
+  const menuItems = [
+    {
+      path: "/Dashboard",
+      icon: <LayoutDashboard size={18} />,
+      label: "Dashboard"
+    },
+    {
+      path: "/Transactions",
+      icon: <ReceiptText size={18} />,
+      label: "Transactions"
+    },
+    {
+      path: "/Budgets",
+      icon: <Wallet size={18} />,
+      label: "Budgets"
+    },
+    {
+      path: "/Analytics",
+      icon: <BarChart3 size={18} />,
+      label: "Analytics"
+    },
+    {
+      path: "/AIInsights",
+      icon: <Sparkles size={18} />,
+      label: "AI Insights"
+    }
+  ];
+
   return (
 
     <aside className="sidebar">
 
       <div>
 
-        {/* Logo */}
-
         <div className="logo">
 
-          <h1>Lumina</h1>
+          <h1>
+            {company.name}
+          </h1>
 
-          <h2>Finance</h2>
+          <h2>
+            {company.subtitle}
+          </h2>
 
-          <p>Institutional Wealth</p>
+          <p>
+            {company.description}
+          </p>
 
         </div>
 
-        {/* Navigation */}
-
         <nav className="menu">
 
-          <Link
-            to="/dashboard"
-            className={`menu-item ${
-              location.pathname === "/dashboard"
-                ? "active"
-                : ""
-            }`}
-          >
-            <LayoutDashboard size={18} />
-            Dashboard
-          </Link>
+          {menuItems.map((item) => (
 
-          <Link
-            to="/transactions"
-            className={`menu-item ${
-              location.pathname === "/transactions"
-                ? "active"
-                : ""
-            }`}
-          >
-            <ReceiptText size={18} />
-            Transactions
-          </Link>
+            <Link
+              key={item.path}
+              to={item.path}
+              className={
+                location.pathname === item.path
+                  ? "menu-item active"
+                  : "menu-item"
+              }
+            >
 
-          <Link
-            to="/budgets"
-            className={`menu-item ${
-              location.pathname === "/budgets"
-                ? "active"
-                : ""
-            }`}
-          >
-            <Wallet size={18} />
-            Budgets
-          </Link>
+              {item.icon}
 
-          <Link
-            to="/analytics"
-            className={`menu-item ${
-              location.pathname === "/analytics"
-                ? "active"
-                : ""
-            }`}
-          >
-            <BarChart3 size={18} />
-            Analytics
-          </Link>
+              <span>
+                {item.label}
+              </span>
 
-          <Link
-            to="/ai-insights"
-            className={`menu-item ${
-              location.pathname === "/ai-insights"
-                ? "active"
-                : ""
-            }`}
-          >
-            <Sparkles size={18} />
-            AI Insights
-          </Link>
+            </Link>
+
+          ))}
 
         </nav>
 
       </div>
 
-      {/* Bottom Menu */}
-
       <div className="bottom-menu">
 
         <Link
-          to="/profile"
-          className={`menu-item ${
-            location.pathname === "/profile"
-              ? "active"
-              : ""
-          }`}
+          to="/Profile"
+          className={
+            location.pathname === "/Profile"
+              ? "menu-item active"
+              : "menu-item"
+          }
         >
+
           <User size={18} />
-          Profile
+
+          <span>
+            Profile
+          </span>
+
         </Link>
 
         <Link
           to="/"
           className="menu-item"
         >
+
           <LogOut size={18} />
-          Logout
+
+          <span>
+            Logout
+          </span>
+
         </Link>
 
       </div>

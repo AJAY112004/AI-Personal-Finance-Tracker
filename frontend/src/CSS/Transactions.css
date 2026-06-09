@@ -1,8 +1,8 @@
 .transactions-content {
-  padding: 10px 30px;
-  width: 100%;
-  min-height: 100vh;
-  background: #f7f8fc;
+padding:30px;
+margin-left:280px;
+background:#f8fafc;
+min-height:calc(100vh - 80px);
 }
 
 .transactions-header {

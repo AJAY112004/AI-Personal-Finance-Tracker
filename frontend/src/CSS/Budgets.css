@@ -1,8 +1,8 @@
 .budget-page{
-padding:10px 28px 40px;
-width:100%;
-min-height:100vh;
-background:#f8f7fb;
+padding:30px;
+margin-left:280px;
+background:#f8fafc;
+min-height:calc(100vh - 80px);
 }
 
 .budget-loading{

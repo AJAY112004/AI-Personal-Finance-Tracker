@@ -10,7 +10,7 @@ import {
   AreaChart,
   Area,
   ResponsiveContainer,
-  Tooltip
+  Tooltip,
 } from "recharts";
 
 function Dashboard() {
@@ -19,19 +19,50 @@ function Dashboard() {
 
   const [dashboardData, setDashboardData] = useState({
     summary: {
-      balance: 0,
-      income: 0,
-      expense: 0,
-      savings: 0,
+      balance: 2450890,
+      income: 145200,
+      expense: 32450,
+      savings: 77.6,
     },
-    insight: "No insights available.",
+
+    insight:
+      "Your operational expenses have decreased by 4% this quarter, largely driven by optimized vendor contracts.",
+
     allocation: {
-      equities: 0,
-      fixed_income: 0,
-      cash: 0,
+      equities: 65,
+      fixed_income: 25,
+      cash: 10,
     },
-    chart: [],
-    transactions: [],
+
+    chart: [
+      { month: "Jan", value: 150000 },
+      { month: "Feb", value: 170000 },
+      { month: "Mar", value: 145000 },
+      { month: "Apr", value: 180000 },
+      { month: "May", value: 220000 },
+      { month: "Jun", value: 280000 },
+    ],
+
+    transactions: [
+      {
+        entity: "Acme Corp Dividend",
+        date: "Oct 24, 2023",
+        amount: 12500,
+        status: "Completed",
+      },
+      {
+        entity: "Stripe Payment",
+        date: "Oct 22, 2023",
+        amount: -4230,
+        status: "Completed",
+      },
+      {
+        entity: "Wire Transfer",
+        date: "Oct 21, 2023",
+        amount: -50000,
+        status: "Processing",
+      },
+    ],
   });
 
   useEffect(() => {
@@ -48,9 +79,8 @@ function Dashboard() {
 
       } catch (error) {
 
-        console.error(
-          "Dashboard Error:",
-          error
+        console.log(
+          "Backend not connected. Using mock data."
         );
 
       } finally {
@@ -95,35 +125,35 @@ function Dashboard() {
 
         </div>
 
-        {/* STATS */}
+        {/* SUMMARY CARDS */}
 
         <div className="stats-grid">
 
           <StatCard
             title="Total Balance"
-            value={dashboardData?.summary?.balance || 0}
-            subtitle="Current balance"
+            value={`₹${dashboardData.summary.balance.toLocaleString()}`}
+            subtitle="+2.4% vs last month"
             type="up"
           />
 
           <StatCard
             title="Monthly Income"
-            value={dashboardData?.summary?.income || 0}
-            subtitle="Income this month"
+            value={`₹${dashboardData.summary.income.toLocaleString()}`}
+            subtitle="+5.1%"
             type="up"
           />
 
           <StatCard
             title="Monthly Expense"
-            value={dashboardData?.summary?.expense || 0}
-            subtitle="Expenses this month"
+            value={`₹${dashboardData.summary.expense.toLocaleString()}`}
+            subtitle="-1.2%"
             type="warning"
           />
 
           <StatCard
             title="Savings Rate"
-            value={dashboardData?.summary?.savings || 0}
-            subtitle="Savings percentage"
+            value={`${dashboardData.summary.savings}%`}
+            subtitle="+0.8%"
             type="target"
           />
 
@@ -132,8 +162,6 @@ function Dashboard() {
         {/* MIDDLE SECTION */}
 
         <div className="middle-section">
-
-          {/* CAPITAL FLOW */}
 
           <div className="capital-card">
 
@@ -159,7 +187,7 @@ function Dashboard() {
 
               <ResponsiveContainer
                 width="100%"
-                height={320}
+                height={300}
               >
 
                 <AreaChart
@@ -169,7 +197,7 @@ function Dashboard() {
                   <defs>
 
                     <linearGradient
-                      id="colorFlow"
+                      id="flowGradient"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -178,14 +206,14 @@ function Dashboard() {
 
                       <stop
                         offset="5%"
-                        stopColor="#cfc8f4"
-                        stopOpacity={0.8}
+                        stopColor="#7C5CFF"
+                        stopOpacity={0.7}
                       />
 
                       <stop
                         offset="95%"
-                        stopColor="#cfc8f4"
-                        stopOpacity={0.1}
+                        stopColor="#7C5CFF"
+                        stopOpacity={0.05}
                       />
 
                     </linearGradient>
@@ -197,9 +225,9 @@ function Dashboard() {
                   <Area
                     type="monotone"
                     dataKey="value"
-                    stroke="#6c4df6"
+                    stroke="#7C5CFF"
                     strokeWidth={3}
-                    fill="url(#colorFlow)"
+                    fill="url(#flowGradient)"
                   />
 
                 </AreaChart>
@@ -210,21 +238,13 @@ function Dashboard() {
 
           </div>
 
-          {/* RIGHT PANEL */}
-
           <div className="right-panel">
 
             <div className="follow-card">
 
-              <div className="follow-top">
+              <h4>AI Insight</h4>
 
-                <span className="promoted">
-                  AI Insight
-                </span>
-
-              </div>
-
-              <p className="quote">
+              <p>
                 {dashboardData.insight}
               </p>
 
@@ -232,34 +252,28 @@ function Dashboard() {
 
             <div className="follow-card">
 
-              <div className="follow-top">
-
-                <span className="promoted">
-                  Allocation
-                </span>
-
-              </div>
+              <h4>Allocation</h4>
 
               <ul className="allocation-list">
 
                 <li>
                   <span>Equities</span>
                   <span>
-                    {dashboardData?.allocation?.equities || 0}%
+                    {dashboardData.allocation.equities}%
                   </span>
                 </li>
 
                 <li>
                   <span>Fixed Income</span>
                   <span>
-                    {dashboardData?.allocation?.fixed_income || 0}%
+                    {dashboardData.allocation.fixed_income}%
                   </span>
                 </li>
 
                 <li>
                   <span>Cash</span>
                   <span>
-                    {dashboardData?.allocation?.cash || 0}%
+                    {dashboardData.allocation.cash}%
                   </span>
                 </li>
 
@@ -288,79 +302,52 @@ function Dashboard() {
             <thead>
 
               <tr>
-
                 <th>ENTITY</th>
                 <th>DATE</th>
                 <th>AMOUNT</th>
                 <th>STATUS</th>
-
               </tr>
 
             </thead>
 
             <tbody>
 
-              {dashboardData.transactions.length > 0 ? (
+              {dashboardData.transactions.map(
+                (transaction, index) => (
 
-                dashboardData.transactions.map(
-                  (transaction, index) => (
+                  <tr key={index}>
 
-                    <tr key={index}>
+                    <td>
+                      {transaction.entity}
+                    </td>
 
-                      <td>
-                        {transaction.entity}
-                      </td>
+                    <td>
+                      {transaction.date}
+                    </td>
 
-                      <td>
-                        {transaction.date}
-                      </td>
+                    <td>
+                      ₹{transaction.amount.toLocaleString()}
+                    </td>
 
-                      <td>
-                        ₹
-                        {Number(
-                          transaction.amount
-                        ).toLocaleString()}
-                      </td>
+                    <td>
 
-                      <td>
+                      <span
+                        className={`status ${
+                          transaction.status === "Completed"
+                            ? "completed"
+                            : "processing"
+                        }`}
+                      >
 
-                        <span
-                          className={`status ${
-                            transaction.status === "Completed"
-                              ? "completed"
-                              : "processing"
-                          }`}
-                        >
+                        {transaction.status}
 
-                          {transaction.status}
+                      </span>
 
-                        </span>
+                    </td>
 
-                      </td>
+                  </tr>
 
-                    </tr>
-
-                  )
                 )
-
-              ) : (
-
-                <tr>
-
-                  <td
-                    colSpan="4"
-                    style={{
-                      textAlign: "center",
-                      padding: "20px"
-                    }}
-                  >
-
-                    No Transactions Found
-
-                  </td>
-
-                </tr>
-
               )}
 
             </tbody>

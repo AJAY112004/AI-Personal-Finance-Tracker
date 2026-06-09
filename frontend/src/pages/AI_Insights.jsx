@@ -2,27 +2,39 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Layout from "../components/Layout";
+import "../CSS/AI_Insights.css";
+
 import {
+  Sparkles,
   MoreVertical,
   Send,
-  TrendingUp
+  TrendingUp,
 } from "lucide-react";
-
-import "../CSS/AI_Insights.css";
 
 function AI_Insights() {
 
   const [loading, setLoading] = useState(true);
 
-  const [insights, setInsights] = useState({
-    assistantName: "",
-    status: "",
-    messages: [],
-    recommendation: {},
-    spendAnalysis: {},
-  });
+  const [insightsData, setInsightsData] =
+    useState({
+      aiMessage:
+        "Good morning. I've analyzed your recent portfolio movements and noticed a 15% increase in operational expenses primarily driven by software subscriptions.",
 
-  const [prompt, setPrompt] = useState("");
+      aiResponse:
+        "Here is the analysis. I found 3 overlapping cloud services contributing to redundant licensing costs.",
+
+      recommendation: {
+        title: "Optimize Liquidity",
+        description:
+          "Sweep excess operational cash into short-term treasury yields to capture an estimated $12k this quarter.",
+      },
+
+      spendAnalysis: {
+        marketing: 45200,
+        infrastructure: 28900,
+        score: 92,
+      },
+    });
 
   useEffect(() => {
 
@@ -34,13 +46,12 @@ function AI_Insights() {
           "http://127.0.0.1:8000/api/ai-insights/"
         );
 
-        setInsights(response.data);
+        setInsightsData(response.data);
 
       } catch (error) {
 
-        console.error(
-          "AI Insights Error:",
-          error
+        console.log(
+          "Using demo data until backend is connected."
         );
 
       } finally {
@@ -55,26 +66,14 @@ function AI_Insights() {
 
   }, []);
 
-  const handleSend = () => {
-
-    if (!prompt.trim()) return;
-
-    console.log(prompt);
-
-    setPrompt("");
-
-  };
-
   if (loading) {
 
     return (
 
       <Layout>
 
-        <div className="ai-loading">
-
+        <div className="loading-page">
           Loading AI Insights...
-
         </div>
 
       </Layout>
@@ -98,41 +97,34 @@ function AI_Insights() {
           </h1>
 
           <p>
-            Your personalized financial
-            forecasting and automated
-            recommendations.
+            Your personalized financial forecasting
+            and automated recommendations.
           </p>
 
         </div>
 
-        <div className="ai-grid">
+        {/* TOP SECTION */}
 
-          {/* CHAT */}
+        <div className="ai-top-grid">
+
+          {/* CHAT CARD */}
 
           <div className="chat-card">
 
             <div className="chat-header">
 
-              <div className="chat-title">
+              <div className="ai-title">
 
-                <div className="chat-avatar">
-
-                  ✦
-
-                </div>
+                <Sparkles size={18} />
 
                 <div>
 
                   <h3>
-                    {
-                      insights.assistantName
-                    }
+                    Lumina AI
                   </h3>
 
                   <span>
-                    {
-                      insights.status
-                    }
+                    ● Analyzing Data
                   </span>
 
                 </div>
@@ -145,24 +137,24 @@ function AI_Insights() {
 
             <div className="chat-body">
 
-              {insights.messages?.map(
-                (msg, index) => (
+              <div className="message ai">
 
-                  <div
-                    key={index}
-                    className={
-                      msg.sender === "user"
-                        ? "user-message"
-                        : "bot-message"
-                    }
-                  >
+                {insightsData.aiMessage}
 
-                    {msg.message}
+              </div>
 
-                  </div>
+              <div className="message user">
 
-                )
-              )}
+                Yes, generate a summary of
+                overlapping tools.
+
+              </div>
+
+              <div className="message ai">
+
+                {insightsData.aiResponse}
+
+              </div>
 
             </div>
 
@@ -171,19 +163,11 @@ function AI_Insights() {
               <input
                 type="text"
                 placeholder="Ask Lumina to analyze specific trends..."
-                value={prompt}
-                onChange={(e) =>
-                  setPrompt(
-                    e.target.value
-                  )
-                }
               />
 
-              <button
-                onClick={handleSend}
-              >
+              <button>
 
-                <Send size={18} />
+                <Send size={16} />
 
               </button>
 
@@ -203,134 +187,146 @@ function AI_Insights() {
 
           </div>
 
-          {/* RIGHT COLUMN */}
+          {/* RIGHT PANEL */}
 
-          <div className="ai-side">
-
-            {/* RECOMMENDATION */}
+          <div className="right-panel">
 
             <div className="recommendation-card">
 
-              <div className="recommendation-top">
-
-                <TrendingUp
-                  size={18}
-                />
-
-                <span>
-                  High Priority
-                </span>
-
+              <div className="priority">
+                High Priority
               </div>
 
+              <TrendingUp size={22} />
+
               <h3>
-
                 {
-                  insights
-                    ?.recommendation
-                    ?.title
+                  insightsData.recommendation
+                    .title
                 }
-
               </h3>
 
               <p>
-
                 {
-                  insights
-                    ?.recommendation
-                    ?.description
+                  insightsData.recommendation
+                    .description
                 }
-
               </p>
 
-              <button>
-
+              <a href="/">
                 Execute Sweep →
-
-              </button>
+              </a>
 
             </div>
-
-            {/* SPEND ANALYSIS */}
 
             <div className="analysis-card">
 
               <h4>
-                AI Spend Velocity Analysis
+                AI SPEND VELOCITY ANALYSIS
               </h4>
 
-              <div className="analysis-row">
+              <div className="metric">
 
                 <span>
                   Marketing
                 </span>
 
                 <strong>
-
-                  ₹{
-                    insights
-                      ?.spendAnalysis
-                      ?.marketing
+                  $
+                  {
+                    insightsData
+                      .spendAnalysis
+                      .marketing
                   }
-
                 </strong>
 
               </div>
 
-              <div className="progress-line">
-
-                <div
-                  style={{
-                    width: "85%"
-                  }}
-                />
+              <div className="progress">
+                <span></span>
               </div>
 
-              <div className="analysis-row">
+              <div className="metric">
 
                 <span>
                   Infrastructure
                 </span>
 
                 <strong>
-
-                  ₹{
-                    insights
-                      ?.spendAnalysis
-                      ?.infrastructure
+                  $
+                  {
+                    insightsData
+                      .spendAnalysis
+                      .infrastructure
                   }
-
                 </strong>
 
               </div>
 
-              <div className="progress-line">
-
-                <div
-                  style={{
-                    width: "70%"
-                  }}
-                />
+              <div className="progress second">
+                <span></span>
               </div>
 
               <div className="score">
 
-                Efficiency Score
-
                 <span>
+                  Efficiency Score
+                </span>
 
+                <strong>
                   {
-                    insights
-                      ?.spendAnalysis
-                      ?.score
+                    insightsData
+                      .spendAnalysis
+                      .score
                   }
                   /100
-
-                </span>
+                </strong>
 
               </div>
 
             </div>
+
+          </div>
+
+        </div>
+
+        {/* PREDICTIVE CASH FLOW */}
+
+        <div className="cashflow-card">
+
+          <div className="cashflow-header">
+
+            <div>
+
+              <h2>
+                Predictive Cash Flow
+              </h2>
+
+              <p>
+                AI-generated projection
+                based on historical run-rates.
+              </p>
+
+            </div>
+
+            <div className="time-filter">
+
+              <button>
+                30D
+              </button>
+
+              <button className="active">
+                90D
+              </button>
+
+            </div>
+
+          </div>
+
+          <div className="cashflow-placeholder">
+
+            Chart will be connected
+            from backend later.
 
           </div>
 

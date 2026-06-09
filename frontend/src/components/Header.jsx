@@ -1,53 +1,102 @@
-import "../CSS/Header.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import {
+  Search,
   Bell,
   Moon,
-  Settings,
-  Search
+  Settings
 } from "lucide-react";
 
+import "../CSS/Header.css";
+
 function Header() {
+
+  const [user, setUser] = useState({
+    profileImage: "",
+  });
+
+  useEffect(() => {
+
+    const fetchHeaderData = async () => {
+
+      try {
+
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/header/"
+        );
+
+        setUser(response.data);
+
+      } catch (error) {
+
+        console.error(
+          "Header Error:",
+          error
+        );
+
+      }
+
+    };
+
+    fetchHeaderData();
+
+  }, []);
 
   return (
 
     <header className="header">
 
-  <div className="search-box">
+      {/* SEARCH */}
 
-    <Search size={20} />
+      <div className="search-box">
 
-    <input
-      type="text"
-      placeholder="Search..."
-    />
+        <Search
+          size={20}
+          className="search-icon"
+        />
 
-  </div>
+        <input
+          type="text"
+          placeholder="Search..."
+        />
 
-  <div className="header-right">
+      </div>
 
-    <div className="header-icon">
-      <Bell size={22} />
-    </div>
+      {/* RIGHT SIDE */}
 
-    <div className="header-icon">
-      <Moon size={22} />
-    </div>
+      <div className="header-right">
 
-    <div className="header-icon">
-      <Settings size={22} />
-    </div>
+        <button className="header-icon">
 
-    <img
-      
-      src="https://i.pravatar.cc/50"
-      alt="profile"
-      className="profile-image"
-    />
+          <Bell size={22} />
 
-  </div>
+        </button>
 
-</header>
+        <button className="header-icon">
 
+          <Moon size={22} />
+
+        </button>
+
+        <button className="header-icon">
+
+          <Settings size={22} />
+
+        </button>
+
+        <img
+          src={
+            user.profileImage ||
+            "https://i.pravatar.cc/100"
+          }
+          alt="Profile"
+          className="header-avatar"
+        />
+
+      </div>
+
+    </header>
 
   );
 
