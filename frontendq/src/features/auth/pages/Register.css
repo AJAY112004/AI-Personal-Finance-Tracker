@@ -1,0 +1,313 @@
+.create-page {
+  min-height: 100vh;
+  display: flex;
+  background: #f7f3fb;
+  font-family: "Inter", sans-serif;
+}
+
+.create-left {
+  flex: 1;
+  background: #ece4fa;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brand {
+  color: #6941c6;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.hero-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.hero-card h2 {
+  font-size: 38px;
+  line-height: 1.1;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.hero-card p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.growth-card {
+  width: 150px;
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-top: 25px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.growth-card span {
+  font-size: 12px;
+  color: #777;
+}
+
+.growth-card h3 {
+  margin-top: 5px;
+  color: #6941c6;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.bar {
+  width: 42px;
+  border-radius: 6px 6px 0 0;
+}
+
+.b1 {
+  height: 30px;
+  background: #cfc1ff;
+}
+
+.b2 {
+  height: 55px;
+  background: #c5b3ff;
+}
+
+.b3 {
+  height: 75px;
+  background: #baa4ff;
+}
+
+.b4 {
+  height: 95px;
+  background: #ae93ff;
+}
+
+.b5 {
+  height: 115px;
+  background: #6941c6;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #666;
+}
+
+.create-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+
+.create-form {
+  width: 100%;
+  max-width: 420px;
+}
+
+.create-form h1 {
+  font-size: 46px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.create-form label {
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+}
+
+.input-box svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.input-box input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: white;
+  padding-left: 42px;
+  padding-right: 16px;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-box input:focus {
+  border-color: #6941c6;
+}
+
+.password-box {
+  position: relative;
+  width: 100%;
+}
+
+.password-box input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: white;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  outline: none;
+}
+
+.password-box input:focus {
+  border-color: #6941c6;
+}
+
+.eye-btn {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #9ca3af;
+}
+
+.password-note {
+  display: block;
+  margin-top: 6px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #777;
+}
+
+.create-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    #6941c6,
+    #8b5cf6
+  );
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.create-btn:hover {
+  opacity: 0.9;
+}
+
+.divider {
+  margin: 22px 0;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.social-row {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  flex: 1;
+  height: 44px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.social-btn:hover {
+  background: #fafafa;
+}
+
+.signin-link {
+  margin-top: 24px;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+
+.signin-link a {
+  color: #6941c6;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+@media (max-width: 900px) {
+
+  .create-left {
+    display: none;
+  }
+
+  .create-right {
+    flex: 1;
+  }
+
+  .create-form {
+    max-width: 380px;
+  }
+
+  .create-form h1 {
+    font-size: 36px;
+  }
+}
